@@ -12,7 +12,9 @@ import 'package:flutter_admin/screens/todo_screen.dart';
 import 'package:shadcn_flutter/shadcn_flutter.dart';
 
 class DefaultScreen extends StatefulWidget {
-  const DefaultScreen({super.key});
+  final void Function(ThemeMode)? onThemeChanged;
+
+  const DefaultScreen({super.key, this.onThemeChanged});
 
   @override
   State<DefaultScreen> createState() => DefaultScreenState();
@@ -69,14 +71,43 @@ class DefaultScreenState extends State<DefaultScreen> {
                   expanded = !expanded;
                 });
               },
-              child: const Icon(Icons.menu),
+              child: const Icon(LucideIcons.menu),
             ),
           ],
           trailing: <Widget>[
-            GhostButton(
-              density: ButtonDensity.icon,
-              child: const Icon(Icons.dark_mode),
-              onPressed: () {},
+            Builder(
+              builder: (context) {
+                return GhostButton(
+                  density: ButtonDensity.icon,
+                  child: const Icon(LucideIcons.moon),
+                  onPressed: () {
+                    showDropdown(
+                      context: context,
+                      builder: (context) {
+                        return DropdownMenu(
+                          children: [
+                            MenuButton(
+                              onPressed: (_) =>
+                                  widget.onThemeChanged?.call(ThemeMode.light),
+                              child: Text("Light Mode"),
+                            ),
+                            MenuButton(
+                              onPressed: (_) =>
+                                  widget.onThemeChanged?.call(ThemeMode.dark),
+                              child: Text("Dark Mode"),
+                            ),
+                            MenuButton(
+                              onPressed: (_) =>
+                                  widget.onThemeChanged?.call(ThemeMode.system),
+                              child: Text("System"),
+                            ),
+                          ],
+                        );
+                      },
+                    );
+                  },
+                );
+              },
             ),
           ],
         ),
@@ -106,17 +137,17 @@ class DefaultScreenState extends State<DefaultScreen> {
                   },
                   children: [
                     buildLabel("Apps"),
-                    buildButton("Home", Icons.home),
-                    buildButton("API Keys", Icons.api),
-                    buildButton("Calendar", Icons.calendar_today),
-                    buildButton("Chat", Icons.message),
-                    buildButton("File Manager", Icons.file_open),
-                    buildButton("Invoice", Icons.receipt),
-                    buildButton("Kanban Board", Icons.view_kanban),
-                    buildButton("Mail", Icons.mail),
-                    buildButton("Notes", Icons.note),
-                    buildButton("Social Media", Icons.comment),
-                    buildButton("To-Do", Icons.sticky_note_2),
+                    buildButton("Home", LucideIcons.house),
+                    buildButton("API Keys", LucideIcons.key),
+                    buildButton("Calendar", LucideIcons.calendar),
+                    buildButton("Chat", LucideIcons.messageCircle),
+                    buildButton("File Manager", LucideIcons.file),
+                    buildButton("Invoice", LucideIcons.receipt),
+                    buildButton("Kanban Board", LucideIcons.kanban),
+                    buildButton("Mail", LucideIcons.mail),
+                    buildButton("Notes", LucideIcons.stickyNote),
+                    buildButton("Social Media", LucideIcons.messageSquare),
+                    buildButton("To-Do", LucideIcons.listTodo),
                   ],
                 ),
                 const VerticalDivider(),

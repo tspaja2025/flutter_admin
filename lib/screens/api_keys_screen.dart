@@ -170,8 +170,8 @@ class ApiKeysScreenState extends State<ApiKeysScreen> {
       child: Column(
         crossAxisAlignment: CrossAxisAlignment.start,
         children: [
-          PrimaryButton(
-            leading: const Icon(Icons.add),
+          SecondaryButton(
+            leading: const Icon(LucideIcons.plus),
             onPressed: _showCreateDialog,
             child: const Text("Create New Key"),
           ),
@@ -261,7 +261,7 @@ class ApiKeysScreenState extends State<ApiKeysScreen> {
                                       alignment: Alignment.center,
                                       child: IconButton.destructive(
                                         density: ButtonDensity.icon,
-                                        icon: const Icon(Icons.delete),
+                                        icon: const Icon(LucideIcons.trash),
                                         onPressed: () => _deleteApiKey(key.id),
                                       ),
                                     ),

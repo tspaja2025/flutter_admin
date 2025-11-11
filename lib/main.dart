@@ -5,15 +5,29 @@ void main() {
   runApp(const MyApp());
 }
 
-class MyApp extends StatelessWidget {
+class MyApp extends StatefulWidget {
   const MyApp({super.key});
+
+  @override
+  State<MyApp> createState() => MyAppState();
+}
+
+class MyAppState extends State<MyApp> {
+  ThemeMode _themeMode = ThemeMode.system;
+
+  void _changeTheme(ThemeMode mode) {
+    setState(() {
+      _themeMode = mode;
+    });
+  }
 
   @override
   Widget build(BuildContext context) {
     return ShadcnApp(
       debugShowCheckedModeBanner: false,
+      themeMode: _themeMode,
       theme: ThemeData(
-        colorScheme: ColorSchemes.lightGreen,
+        colorScheme: ColorSchemes.lightDefaultColor,
         radius: 0.5,
         scaling: 1.2,
         surfaceOpacity: 0.8,
@@ -24,7 +38,7 @@ class MyApp extends StatelessWidget {
         ),
       ),
       darkTheme: ThemeData.dark(
-        colorScheme: ColorSchemes.darkGreen,
+        colorScheme: ColorSchemes.darkDefaultColor,
         radius: 0.5,
         scaling: 1.2,
         surfaceOpacity: 0.8,
@@ -35,7 +49,7 @@ class MyApp extends StatelessWidget {
         ),
       ),
       title: "Flutter Admin",
-      home: DefaultScreen(),
+      home: DefaultScreen(onThemeChanged: _changeTheme),
     );
   }
 }

@@ -34,10 +34,7 @@ class TodoScreenState extends State<TodoScreen> {
                         features: [InputFeature.clear()],
                       ),
                     ),
-                    PrimaryButton(
-                      child: const Text('Deploy'),
-                      onPressed: () {},
-                    ),
+                    PrimaryButton(child: const Text('Add'), onPressed: () {}),
                   ],
                 ),
               ],
@@ -111,12 +108,12 @@ class TodoScreenState extends State<TodoScreen> {
                 GhostButton(
                   density: ButtonDensity.icon,
                   onPressed: () {},
-                  child: const Icon(Icons.edit),
+                  child: const Icon(LucideIcons.pencil),
                 ),
                 GhostButton(
                   density: ButtonDensity.icon,
                   onPressed: () {},
-                  child: const Icon(Icons.delete),
+                  child: const Icon(LucideIcons.trash),
                 ),
               ],
             ),
