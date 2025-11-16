@@ -5,14 +5,103 @@ class FileManagerScreen extends StatelessWidget {
 
   @override
   Widget build(BuildContext context) {
-    return const Padding(
+    return Padding(
       padding: EdgeInsets.all(16),
       child: Column(
         crossAxisAlignment: CrossAxisAlignment.start,
         children: [
-          Text(
-            "File Manager Screen",
-            style: TextStyle(fontSize: 24, fontWeight: FontWeight.bold),
+          Flex(
+            direction: Axis.horizontal,
+            spacing: 8,
+            children: [
+              Breadcrumb(
+                separator: Breadcrumb.arrowSeparator,
+                children: [
+                  TextButton(
+                    onPressed: () {},
+                    density: ButtonDensity.compact,
+                    child: const Text("Home"),
+                  ),
+                  const MoreDots(),
+                  TextButton(
+                    onPressed: () {},
+                    density: ButtonDensity.compact,
+                    child: const Text("Folder Name"),
+                  ),
+                  const Text("Breadcrumb"),
+                ],
+              ),
+              Expanded(
+                child: TextField(
+                  placeholder: const Text("Search files..."),
+                  features: [
+                    InputFeature.leading(
+                      StatedWidget.builder(
+                        builder: (context, states) {
+                          if (states.hovered) {
+                            return const Icon(LucideIcons.search);
+                          } else {
+                            return const Icon(
+                              LucideIcons.search,
+                            ).iconMutedForeground();
+                          }
+                        },
+                      ),
+                    ),
+                  ],
+                ),
+              ),
+              Wrap(
+                spacing: 8,
+                children: [
+                  IconButton.outline(
+                    density: ButtonDensity.icon,
+                    onPressed: () {},
+                    icon: const Icon(LucideIcons.grid3x3),
+                  ),
+                  IconButton.outline(
+                    onPressed: () {},
+                    icon: const Icon(LucideIcons.list),
+                  ),
+                ],
+              ),
+              SecondaryButton(
+                onPressed: () {},
+                leading: const Icon(LucideIcons.plus),
+                child: const Text("New"),
+              ),
+            ],
+          ),
+          const SizedBox(height: 8),
+          Divider(),
+          const SizedBox(height: 8),
+          SizedBox(
+            width: 200,
+            child: Card(
+              padding: const EdgeInsets.all(16),
+              child: Column(
+                children: [
+                  Flex(
+                    direction: Axis.horizontal,
+                    mainAxisAlignment: MainAxisAlignment.spaceBetween,
+                    children: [
+                      Checkbox(
+                        state: CheckboxState.unchecked,
+                        onChanged: (_) {},
+                      ),
+                      IconButton.ghost(
+                        onPressed: () {},
+                        density: ButtonDensity.icon,
+                        icon: const Icon(LucideIcons.ellipsis),
+                      ),
+                    ],
+                  ),
+                  const Icon(LucideIcons.folder),
+                  const Text("Document").bold(),
+                  const Text("Jan 15, 2025").muted().small(),
+                ],
+              ),
+            ),
           ),
         ],
       ),

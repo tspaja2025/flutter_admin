@@ -198,7 +198,7 @@ class NotesScreenState extends State<NotesScreen> {
                         Center(
                           child: Column(
                             children: [
-                              const Text('No invoices yet').semiBold(),
+                              const Text('No notes yet').semiBold(),
                               const SizedBox(height: 4),
                               const Text(
                                 'Get started by creating your first invoice.',
