@@ -65,8 +65,8 @@ class ApiKeysScreenState extends State<ApiKeysScreen> {
                 content: ConstrainedBox(
                   constraints: const BoxConstraints(maxWidth: 400),
                   child: Column(
-                    mainAxisSize: MainAxisSize.min,
-                    crossAxisAlignment: CrossAxisAlignment.start,
+                    mainAxisSize: .min,
+                    crossAxisAlignment: .start,
                     children: [
                       FormField(
                         key: apiKeyName,
@@ -143,8 +143,8 @@ class ApiKeysScreenState extends State<ApiKeysScreen> {
   TableCell buildHeaderCell(String text, [bool alignRight = false]) {
     return TableCell(
       child: Container(
-        padding: const EdgeInsets.all(8),
-        alignment: alignRight ? Alignment.centerRight : null,
+        padding: const .all(8),
+        alignment: alignRight ? .centerRight : null,
         child: Text(text).muted().semiBold(),
       ),
     );
@@ -154,8 +154,8 @@ class ApiKeysScreenState extends State<ApiKeysScreen> {
   TableCell buildCell(String text, [bool alignRight = false]) {
     return TableCell(
       child: Container(
-        padding: const EdgeInsets.all(8),
-        alignment: alignRight ? Alignment.centerRight : null,
+        padding: const .all(8),
+        alignment: alignRight ? .centerRight : null,
         child: Text(text),
       ),
     );
@@ -166,9 +166,9 @@ class ApiKeysScreenState extends State<ApiKeysScreen> {
     final hasKeys = _apiKeys.isNotEmpty;
 
     return Padding(
-      padding: const EdgeInsets.all(16),
+      padding: const .all(16),
       child: Column(
-        crossAxisAlignment: CrossAxisAlignment.start,
+        crossAxisAlignment: .start,
         children: [
           SecondaryButton(
             leading: const Icon(LucideIcons.plus),
@@ -177,13 +177,13 @@ class ApiKeysScreenState extends State<ApiKeysScreen> {
           ),
           const SizedBox(height: 8),
           Flex(
-            direction: Axis.horizontal,
+            direction: .horizontal,
             children: [
               Expanded(
                 child: Card(
-                  padding: const EdgeInsets.all(16),
+                  padding: const .all(16),
                   child: Column(
-                    crossAxisAlignment: CrossAxisAlignment.start,
+                    crossAxisAlignment: .start,
                     children: [
                       const Text('Your API Keys').semiBold(),
                       const SizedBox(height: 4),
@@ -248,7 +248,7 @@ class ApiKeysScreenState extends State<ApiKeysScreen> {
                                   ),
                                   TableCell(
                                     child: Align(
-                                      alignment: Alignment.centerLeft,
+                                      alignment: .centerLeft,
                                       child: key.isActive
                                           ? PrimaryBadge(child: Text('Active'))
                                           : SecondaryBadge(
@@ -258,7 +258,7 @@ class ApiKeysScreenState extends State<ApiKeysScreen> {
                                   ),
                                   TableCell(
                                     child: Align(
-                                      alignment: Alignment.center,
+                                      alignment: .center,
                                       child: IconButton.destructive(
                                         density: ButtonDensity.icon,
                                         icon: const Icon(LucideIcons.trash),

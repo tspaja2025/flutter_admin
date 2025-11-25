@@ -8,9 +8,9 @@ class InvoiceScreen extends StatelessWidget {
   @override
   Widget build(BuildContext context) {
     return Padding(
-      padding: EdgeInsets.all(16),
+      padding: const .all(16),
       child: Column(
-        crossAxisAlignment: CrossAxisAlignment.start,
+        crossAxisAlignment: .start,
         children: [
           SecondaryButton(
             leading: const Icon(LucideIcons.plus),
@@ -23,9 +23,9 @@ class InvoiceScreen extends StatelessWidget {
             children: [
               Expanded(
                 child: Card(
-                  padding: const EdgeInsets.all(16),
+                  padding: const .all(16),
                   child: Column(
-                    crossAxisAlignment: CrossAxisAlignment.start,
+                    crossAxisAlignment: .start,
                     children: [
                       const Text('Invoice Manager').semiBold(),
                       const SizedBox(height: 4),

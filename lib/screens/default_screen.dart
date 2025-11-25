@@ -7,6 +7,7 @@ import 'package:flutter_admin/screens/invoice_screen.dart';
 import 'package:flutter_admin/screens/kanban_board_screen.dart';
 import 'package:flutter_admin/screens/mail_screen.dart';
 import 'package:flutter_admin/screens/notes_screen.dart';
+import 'package:flutter_admin/screens/qr_generator_screen.dart';
 import 'package:flutter_admin/screens/social_media_screen.dart';
 import 'package:flutter_admin/screens/todo_screen.dart';
 import 'package:shadcn_flutter/shadcn_flutter.dart';
@@ -34,6 +35,7 @@ class DefaultScreenState extends State<DefaultScreen> {
     const KanbanBoardScreen(),
     const MailScreen(),
     const NotesScreen(),
+    const QrGeneratorScreen(),
     const SocialMediaScreen(),
     const TodoScreen(),
   ];
@@ -41,9 +43,9 @@ class DefaultScreenState extends State<DefaultScreen> {
   NavigationBarItem buildButton(String label, IconData icon) {
     return NavigationItem(
       label: Text(label),
-      alignment: Alignment.centerLeft,
+      alignment: .centerLeft,
       child: Tooltip(
-        alignment: Alignment.centerRight,
+        alignment: .centerRight,
         tooltip: (_) => TooltipContainer(child: Text(label)),
         child: Icon(icon),
       ),
@@ -52,7 +54,7 @@ class DefaultScreenState extends State<DefaultScreen> {
 
   NavigationLabel buildLabel(String label) {
     return NavigationLabel(
-      alignment: Alignment.centerLeft,
+      alignment: .centerLeft,
       child: Text(label).semiBold().muted(),
     );
   }
@@ -65,7 +67,7 @@ class DefaultScreenState extends State<DefaultScreen> {
           title: const Text("Flutter Admin"),
           leading: <Widget>[
             NavigationButton(
-              alignment: Alignment.centerLeft,
+              alignment: .centerLeft,
               onPressed: () {
                 setState(() {
                   expanded = !expanded;
@@ -75,6 +77,10 @@ class DefaultScreenState extends State<DefaultScreen> {
             ),
           ],
           trailing: <Widget>[
+            IconButton.ghost(
+              onPressed: () {},
+              icon: const Icon(LucideIcons.search),
+            ),
             Builder(
               builder: (context) {
                 return GhostButton(
@@ -114,14 +120,14 @@ class DefaultScreenState extends State<DefaultScreen> {
         const Divider(),
       ],
       child: Row(
-        mainAxisAlignment: MainAxisAlignment.start,
-        crossAxisAlignment: CrossAxisAlignment.start,
+        mainAxisAlignment: .start,
+        crossAxisAlignment: .start,
         children: <Widget>[
           SizedBox(
             height: MediaQuery.of(context).size.height,
             width: MediaQuery.of(context).size.width,
             child: Row(
-              crossAxisAlignment: CrossAxisAlignment.stretch,
+              crossAxisAlignment: .stretch,
               children: [
                 NavigationRail(
                   backgroundColor: Theme.of(context).colorScheme.card,
@@ -146,6 +152,7 @@ class DefaultScreenState extends State<DefaultScreen> {
                     buildButton("Kanban Board", LucideIcons.kanban),
                     buildButton("Mail", LucideIcons.mail),
                     buildButton("Notes", LucideIcons.stickyNote),
+                    buildButton("Qr Generator", LucideIcons.qrCode),
                     buildButton("Social Media", LucideIcons.messageSquare),
                     buildButton("To-Do", LucideIcons.listTodo),
                   ],

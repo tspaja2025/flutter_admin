@@ -5,14 +5,54 @@ class ChatScreen extends StatelessWidget {
 
   @override
   Widget build(BuildContext context) {
-    return const Padding(
-      padding: EdgeInsets.all(16),
+    return Padding(
+      padding: .all(16),
       child: Column(
-        crossAxisAlignment: CrossAxisAlignment.start,
+        crossAxisAlignment: .start,
+        mainAxisAlignment: .spaceBetween,
         children: [
-          Text(
-            "Chat Screen",
-            style: TextStyle(fontSize: 24, fontWeight: FontWeight.bold),
+          Row(
+            mainAxisAlignment: .spaceBetween,
+            children: [
+              Avatar(
+                initials: Avatar.getInitials("john Doe"),
+                provider: const NetworkImage(
+                  'https://avatars.githubusercontent.com/u/64018564?v=4',
+                ),
+              ),
+              Wrap(
+                children: [
+                  IconButton.ghost(
+                    onPressed: () {},
+                    icon: const Icon(LucideIcons.phone),
+                  ),
+                  IconButton.ghost(
+                    onPressed: () {},
+                    icon: const Icon(LucideIcons.video),
+                  ),
+                  IconButton.ghost(
+                    onPressed: () {},
+                    icon: const Icon(LucideIcons.circleAlert),
+                  ),
+                ],
+              ),
+            ],
+          ),
+          Row(
+            spacing: 8,
+            children: [
+              IconButton.ghost(
+                onPressed: () {},
+                icon: const Icon(LucideIcons.smile),
+              ),
+              Expanded(
+                child: const TextField(placeholder: Text("Type a message...")),
+              ),
+              IconButton.ghost(
+                onPressed: () {},
+                icon: const Icon(LucideIcons.send),
+              ),
+            ],
           ),
         ],
       ),

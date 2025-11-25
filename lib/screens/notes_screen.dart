@@ -15,12 +15,12 @@ class NotesScreenState extends State<NotesScreen> {
   @override
   Widget build(BuildContext context) {
     return Padding(
-      padding: EdgeInsets.all(16),
+      padding: const .all(16),
       child: Column(
-        crossAxisAlignment: CrossAxisAlignment.start,
+        crossAxisAlignment: .start,
         children: [
           Flex(
-            direction: Axis.horizontal,
+            direction: .horizontal,
             spacing: 8,
             children: [
               Expanded(
@@ -86,8 +86,8 @@ class NotesScreenState extends State<NotesScreen> {
           ),
           const SizedBox(height: 8),
           Flex(
-            direction: Axis.horizontal,
-            mainAxisAlignment: MainAxisAlignment.spaceBetween,
+            direction: .horizontal,
+            mainAxisAlignment: .spaceBetween,
             children: [
               Wrap(
                 spacing: 8,
@@ -186,13 +186,13 @@ class NotesScreenState extends State<NotesScreen> {
           ),
           const SizedBox(height: 8),
           Flex(
-            direction: Axis.horizontal,
+            direction: .horizontal,
             children: [
               Expanded(
                 child: Card(
-                  padding: const EdgeInsets.all(16),
+                  padding: const .all(16),
                   child: Column(
-                    crossAxisAlignment: CrossAxisAlignment.start,
+                    crossAxisAlignment: .start,
                     children: [
                       if (!hasNotes)
                         Center(

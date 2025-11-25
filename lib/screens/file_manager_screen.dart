@@ -6,12 +6,12 @@ class FileManagerScreen extends StatelessWidget {
   @override
   Widget build(BuildContext context) {
     return Padding(
-      padding: EdgeInsets.all(16),
+      padding: const .all(16),
       child: Column(
-        crossAxisAlignment: CrossAxisAlignment.start,
+        crossAxisAlignment: .start,
         children: [
           Flex(
-            direction: Axis.horizontal,
+            direction: .horizontal,
             spacing: 8,
             children: [
               Breadcrumb(
@@ -73,17 +73,17 @@ class FileManagerScreen extends StatelessWidget {
             ],
           ),
           const SizedBox(height: 8),
-          Divider(),
+          const Divider(),
           const SizedBox(height: 8),
           SizedBox(
             width: 200,
             child: Card(
-              padding: const EdgeInsets.all(16),
+              padding: const .all(16),
               child: Column(
                 children: [
                   Flex(
-                    direction: Axis.horizontal,
-                    mainAxisAlignment: MainAxisAlignment.spaceBetween,
+                    direction: .horizontal,
+                    mainAxisAlignment: .spaceBetween,
                     children: [
                       Checkbox(
                         state: CheckboxState.unchecked,

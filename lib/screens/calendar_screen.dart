@@ -15,8 +15,8 @@ class CalendarScreenState extends State<CalendarScreen> {
   TableCell buildHeaderCell(String text) {
     return TableCell(
       child: Container(
-        padding: const EdgeInsets.all(8),
-        alignment: Alignment.center,
+        padding: const .all(8),
+        alignment: .center,
         child: Text(text).muted().semiBold(),
       ),
     );
@@ -25,8 +25,8 @@ class CalendarScreenState extends State<CalendarScreen> {
   TableCell buildCell(String text) {
     return TableCell(
       child: OutlinedContainer(
-        padding: const EdgeInsets.only(top: 32, bottom: 32),
-        borderRadius: BorderRadius.circular(0),
+        padding: const .only(top: 32, bottom: 32),
+        borderRadius: .circular(0),
         child: Center(child: Text(text).muted().semiBold()),
       ),
     );
@@ -37,15 +37,15 @@ class CalendarScreenState extends State<CalendarScreen> {
     return Padding(
       padding: EdgeInsets.all(16),
       child: Column(
-        crossAxisAlignment: CrossAxisAlignment.start,
+        crossAxisAlignment: .start,
         children: [
           Flex(
-            direction: Axis.horizontal,
-            mainAxisAlignment: MainAxisAlignment.spaceBetween,
+            direction: .horizontal,
+            mainAxisAlignment: .spaceBetween,
             children: [
               Wrap(
                 spacing: 8,
-                crossAxisAlignment: WrapCrossAlignment.center,
+                crossAxisAlignment: .center,
                 children: [
                   IconButton.outline(
                     onPressed: () {},
@@ -60,7 +60,7 @@ class CalendarScreenState extends State<CalendarScreen> {
               ),
               Wrap(
                 spacing: 8,
-                crossAxisAlignment: WrapCrossAlignment.center,
+                crossAxisAlignment: .center,
                 children: [
                   OutlineButton(onPressed: () {}, child: const Text("Today")),
                   SecondaryButton(onPressed: () {}, child: const Text("Month")),
@@ -79,7 +79,7 @@ class CalendarScreenState extends State<CalendarScreen> {
                               child: Form(
                                 controller: controller,
                                 child: Column(
-                                  crossAxisAlignment: CrossAxisAlignment.start,
+                                  crossAxisAlignment: .start,
                                   children: [
                                     FormField(
                                       key: FormKey(#title),
@@ -109,7 +109,7 @@ class CalendarScreenState extends State<CalendarScreen> {
                                     ),
                                     const SizedBox(height: 8),
                                     Flex(
-                                      direction: Axis.horizontal,
+                                      direction: .horizontal,
                                       spacing: 8,
                                       children: [
                                         DatePicker(
@@ -147,7 +147,7 @@ class CalendarScreenState extends State<CalendarScreen> {
                                       ],
                                     ),
                                     Flex(
-                                      direction: Axis.horizontal,
+                                      direction: .horizontal,
                                       spacing: 8,
                                       children: [
                                         DatePicker(

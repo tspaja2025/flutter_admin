@@ -4,17 +4,17 @@ class KanbanBoardScreen extends StatelessWidget {
   const KanbanBoardScreen({super.key});
 
   final _titleKey = const TextFieldKey(#title);
-  final _descriptionKey = const TextFieldKey(#description);
+  // final _descriptionKey = const TextFieldKey(#description);
 
   @override
   Widget build(BuildContext context) {
     return Padding(
-      padding: EdgeInsets.all(16),
+      padding: const .all(16),
       child: Column(
-        crossAxisAlignment: CrossAxisAlignment.start,
+        crossAxisAlignment: .start,
         children: [
           Flex(
-            direction: Axis.horizontal,
+            direction: .horizontal,
             spacing: 8,
             children: [
               Expanded(
@@ -48,8 +48,8 @@ class KanbanBoardScreen extends StatelessWidget {
           const SizedBox(height: 8),
           // Example columns
           Flex(
-            direction: Axis.horizontal,
-            crossAxisAlignment: CrossAxisAlignment.start,
+            direction: .horizontal,
+            crossAxisAlignment: .start,
             spacing: 16,
             children: [
               Expanded(
@@ -57,7 +57,7 @@ class KanbanBoardScreen extends StatelessWidget {
                   child: Column(
                     children: [
                       Row(
-                        mainAxisAlignment: MainAxisAlignment.spaceBetween,
+                        mainAxisAlignment: .spaceBetween,
                         children: [
                           Wrap(
                             spacing: 8,
@@ -77,9 +77,8 @@ class KanbanBoardScreen extends StatelessWidget {
                                   return AlertDialog(
                                     title: const Text("Add Task"),
                                     content: Column(
-                                      mainAxisSize: MainAxisSize.min,
-                                      crossAxisAlignment:
-                                          CrossAxisAlignment.start,
+                                      mainAxisSize: .min,
+                                      crossAxisAlignment: .start,
                                       children: [
                                         ConstrainedBox(
                                           constraints: const BoxConstraints(
@@ -111,11 +110,11 @@ class KanbanBoardScreen extends StatelessWidget {
                       ),
                       const SizedBox(height: 8),
                       Card(
-                        padding: const EdgeInsets.all(8),
+                        padding: const .all(8),
                         child: Column(
                           children: [
                             Row(
-                              mainAxisAlignment: MainAxisAlignment.spaceBetween,
+                              mainAxisAlignment: .spaceBetween,
                               children: [
                                 const Text("Design System Setup").small(),
                                 Builder(
@@ -160,7 +159,7 @@ class KanbanBoardScreen extends StatelessWidget {
                             ).small(),
                             const SizedBox(height: 16),
                             Row(
-                              mainAxisAlignment: MainAxisAlignment.spaceBetween,
+                              mainAxisAlignment: .spaceBetween,
                               children: [
                                 const Text("19/11/2025").xSmall(),
                                 DestructiveBadge(child: const Text("High")),
@@ -171,11 +170,11 @@ class KanbanBoardScreen extends StatelessWidget {
                       ),
                       const SizedBox(height: 8),
                       Card(
-                        padding: const EdgeInsets.all(8),
+                        padding: const .all(8),
                         child: Column(
                           children: [
                             Row(
-                              mainAxisAlignment: MainAxisAlignment.spaceBetween,
+                              mainAxisAlignment: .spaceBetween,
                               children: [
                                 const Text("API Integration").small(),
                                 Builder(
@@ -220,7 +219,7 @@ class KanbanBoardScreen extends StatelessWidget {
                             ).small(),
                             const SizedBox(height: 16),
                             Row(
-                              mainAxisAlignment: MainAxisAlignment.spaceBetween,
+                              mainAxisAlignment: .spaceBetween,
                               children: [
                                 const Text("19/11/2025").xSmall(),
                                 PrimaryBadge(child: const Text("medium")),
@@ -238,7 +237,7 @@ class KanbanBoardScreen extends StatelessWidget {
                   child: Column(
                     children: [
                       Row(
-                        mainAxisAlignment: MainAxisAlignment.spaceBetween,
+                        mainAxisAlignment: .spaceBetween,
                         children: [
                           Wrap(
                             spacing: 8,
@@ -256,11 +255,11 @@ class KanbanBoardScreen extends StatelessWidget {
                       ),
                       const SizedBox(height: 8),
                       Card(
-                        padding: const EdgeInsets.all(8),
+                        padding: const .all(8),
                         child: Column(
                           children: [
                             Row(
-                              mainAxisAlignment: MainAxisAlignment.spaceBetween,
+                              mainAxisAlignment: .spaceBetween,
                               children: [
                                 const Text("User Authentication").small(),
                                 Builder(
@@ -305,7 +304,7 @@ class KanbanBoardScreen extends StatelessWidget {
                             ).small(),
                             const SizedBox(height: 16),
                             Row(
-                              mainAxisAlignment: MainAxisAlignment.spaceBetween,
+                              mainAxisAlignment: .spaceBetween,
                               children: [
                                 const Text("19/11/2025").xSmall(),
                                 DestructiveBadge(child: const Text("High")),
@@ -322,7 +321,7 @@ class KanbanBoardScreen extends StatelessWidget {
           ),
           const SizedBox(height: 16),
           Flex(
-            direction: Axis.horizontal,
+            direction: .horizontal,
             spacing: 16,
             children: [
               Expanded(
@@ -330,7 +329,7 @@ class KanbanBoardScreen extends StatelessWidget {
                   child: Column(
                     children: [
                       Row(
-                        mainAxisAlignment: MainAxisAlignment.spaceBetween,
+                        mainAxisAlignment: .spaceBetween,
                         children: [
                           Wrap(
                             spacing: 8,
@@ -348,11 +347,11 @@ class KanbanBoardScreen extends StatelessWidget {
                       ),
                       const SizedBox(height: 8),
                       Card(
-                        padding: const EdgeInsets.all(8),
+                        padding: const .all(8),
                         child: Column(
                           children: [
                             Row(
-                              mainAxisAlignment: MainAxisAlignment.spaceBetween,
+                              mainAxisAlignment: .spaceBetween,
                               children: [
                                 const Text("Mobile Responsiveness").small(),
                                 Builder(
@@ -397,7 +396,7 @@ class KanbanBoardScreen extends StatelessWidget {
                             ).small(),
                             const SizedBox(height: 16),
                             Row(
-                              mainAxisAlignment: MainAxisAlignment.spaceBetween,
+                              mainAxisAlignment: .spaceBetween,
                               children: [
                                 const Text("19/11/2025").xSmall(),
                                 DestructiveBadge(child: const Text("medium")),
@@ -415,7 +414,7 @@ class KanbanBoardScreen extends StatelessWidget {
                   child: Column(
                     children: [
                       Row(
-                        mainAxisAlignment: MainAxisAlignment.spaceBetween,
+                        mainAxisAlignment: .spaceBetween,
                         children: [
                           Wrap(
                             spacing: 8,
@@ -433,11 +432,11 @@ class KanbanBoardScreen extends StatelessWidget {
                       ),
                       const SizedBox(height: 8),
                       Card(
-                        padding: const EdgeInsets.all(8),
+                        padding: const .all(8),
                         child: Column(
                           children: [
                             Row(
-                              mainAxisAlignment: MainAxisAlignment.spaceBetween,
+                              mainAxisAlignment: .spaceBetween,
                               children: [
                                 const Text("Project Setup").small(),
                                 Builder(
@@ -480,7 +479,7 @@ class KanbanBoardScreen extends StatelessWidget {
                             const Text("Initialize Flutter project").small(),
                             const SizedBox(height: 16),
                             Row(
-                              mainAxisAlignment: MainAxisAlignment.spaceBetween,
+                              mainAxisAlignment: .spaceBetween,
                               children: [
                                 const Text("19/11/2025").xSmall(),
                                 DestructiveBadge(child: const Text("Low")),

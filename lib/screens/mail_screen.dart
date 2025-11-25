@@ -13,7 +13,7 @@ class MailScreenState extends State<MailScreen> {
     return Padding(
       padding: EdgeInsets.all(16),
       child: OutlinedContainer(
-        clipBehavior: Clip.antiAlias,
+        clipBehavior: .antiAlias,
         child: ResizablePanel.horizontal(
           draggerBuilder: (context) {
             return const HorizontalResizableDragger();
@@ -24,7 +24,7 @@ class MailScreenState extends State<MailScreen> {
               minSize: 160,
               maxSize: 200,
               child: Column(
-                crossAxisAlignment: CrossAxisAlignment.stretch,
+                crossAxisAlignment: .stretch,
                 children: [
                   Padding(
                     padding: EdgeInsets.all(16),
@@ -35,45 +35,45 @@ class MailScreenState extends State<MailScreen> {
                   ),
                   Divider(),
                   Padding(
-                    padding: EdgeInsets.all(16),
+                    padding: const .all(16),
                     child: Column(
-                      crossAxisAlignment: CrossAxisAlignment.stretch,
+                      crossAxisAlignment: .stretch,
                       spacing: 8,
                       children: [
                         GhostButton(
                           onPressed: () {},
                           leading: const Icon(LucideIcons.inbox),
-                          alignment: AlignmentGeometry.centerLeft,
+                          alignment: .centerLeft,
                           child: const Text("Inbox"),
                         ),
                         GhostButton(
                           onPressed: () {},
                           leading: const Icon(LucideIcons.star),
-                          alignment: AlignmentGeometry.centerLeft,
+                          alignment: .centerLeft,
                           child: const Text("Starred"),
                         ),
                         GhostButton(
                           onPressed: () {},
                           leading: const Icon(LucideIcons.send),
-                          alignment: AlignmentGeometry.centerLeft,
+                          alignment: .centerLeft,
                           child: const Text("Sent"),
                         ),
                         GhostButton(
                           onPressed: () {},
                           leading: const Icon(LucideIcons.fileText),
-                          alignment: AlignmentGeometry.centerLeft,
+                          alignment: .centerLeft,
                           child: const Text("Drafts"),
                         ),
                         GhostButton(
                           onPressed: () {},
                           leading: const Icon(LucideIcons.triangleAlert),
-                          alignment: AlignmentGeometry.centerLeft,
+                          alignment: .centerLeft,
                           child: const Text("Spam"),
                         ),
                         GhostButton(
                           onPressed: () {},
                           leading: const Icon(LucideIcons.trash),
-                          alignment: AlignmentGeometry.centerLeft,
+                          alignment: .centerLeft,
                           child: const Text("Trash"),
                         ),
                       ],
@@ -86,10 +86,10 @@ class MailScreenState extends State<MailScreen> {
               initialSize: 750,
               minSize: 160,
               child: Column(
-                crossAxisAlignment: CrossAxisAlignment.stretch,
+                crossAxisAlignment: .stretch,
                 children: [
                   Padding(
-                    padding: EdgeInsets.all(15),
+                    padding: const .all(15),
                     child: TextField(
                       placeholder: const Text("Search Mail..."),
                       features: [
@@ -111,9 +111,9 @@ class MailScreenState extends State<MailScreen> {
                   ),
                   Divider(),
                   Padding(
-                    padding: EdgeInsets.all(16),
+                    padding: const .all(16),
                     child: Column(
-                      crossAxisAlignment: CrossAxisAlignment.stretch,
+                      crossAxisAlignment: .stretch,
                       spacing: 8,
                       children: [],
                     ),

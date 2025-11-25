@@ -100,17 +100,17 @@ class TodoScreenState extends State<TodoScreen> {
     final filtered = _filteredTodos;
 
     return Padding(
-      padding: EdgeInsets.all(16),
+      padding: const .all(16),
       child: Flex(
-        direction: Axis.vertical,
-        crossAxisAlignment: CrossAxisAlignment.start,
+        direction: .vertical,
+        crossAxisAlignment: .start,
         children: [
           AddTodoInput(controller: _textEditingController, onAdd: _addTodo),
 
           const SizedBox(height: 8),
 
           Row(
-            mainAxisAlignment: MainAxisAlignment.spaceBetween,
+            mainAxisAlignment: .spaceBetween,
             children: [
               TodoStatsRow(
                 active: _activeCount,
@@ -187,10 +187,10 @@ class TodoScreenState extends State<TodoScreen> {
   Widget _buildDismissible(Todo todo, int index) {
     return Dismissible(
       key: ValueKey(todo.id),
-      direction: DismissDirection.endToStart,
+      direction: .endToStart,
       background: Container(
-        alignment: Alignment.centerRight,
-        padding: const EdgeInsets.symmetric(horizontal: 24),
+        alignment: .centerRight,
+        padding: const .symmetric(horizontal: 24),
         color: Colors.red,
         child: const Icon(LucideIcons.trash, color: Colors.white),
       ),
@@ -307,9 +307,9 @@ class EmptyStateCard extends StatelessWidget {
       children: [
         Expanded(
           child: Card(
-            padding: const EdgeInsets.all(24),
+            padding: const .all(24),
             child: Column(
-              mainAxisAlignment: MainAxisAlignment.center,
+              mainAxisAlignment: .center,
               children: [
                 Text(
                   isEmpty
