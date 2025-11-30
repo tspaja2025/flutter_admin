@@ -11,18 +11,13 @@ class MailScreenState extends State<MailScreen> {
   @override
   Widget build(BuildContext context) {
     return Padding(
-      padding: EdgeInsets.all(16),
+      padding: const EdgeInsets.all(16),
       child: OutlinedContainer(
-        clipBehavior: .antiAlias,
-        child: ResizablePanel.horizontal(
-          draggerBuilder: (context) {
-            return const HorizontalResizableDragger();
-          },
+        child: Flex(
+          direction: Axis.horizontal,
           children: [
-            ResizablePane(
-              initialSize: 200,
-              minSize: 160,
-              maxSize: 200,
+            SizedBox(
+              width: 256,
               child: Column(
                 crossAxisAlignment: .stretch,
                 children: [
@@ -33,7 +28,7 @@ class MailScreenState extends State<MailScreen> {
                       child: const Text("Compose"),
                     ),
                   ),
-                  Divider(),
+                  const Divider(),
                   Padding(
                     padding: const .all(16),
                     child: Column(
@@ -82,9 +77,8 @@ class MailScreenState extends State<MailScreen> {
                 ],
               ),
             ),
-            ResizablePane(
-              initialSize: 750,
-              minSize: 160,
+            const VerticalDivider(),
+            Flexible(
               child: Column(
                 crossAxisAlignment: .stretch,
                 children: [
@@ -118,8 +112,80 @@ class MailScreenState extends State<MailScreen> {
                       children: [],
                     ),
                   ),
+                  const Divider(),
+                  EmailItem(
+                    title: "Github",
+                    subtitle: "[Repository] New pull request submitted",
+                    content:
+                        "A new pull request has been submitted to your repository...",
+                  ),
+                  const Divider(),
+                  EmailItem(
+                    title: "Marketing Team",
+                    subtitle: "New Product Launch Campaign",
+                    content:
+                        "Exciting news! We're launching our new product...",
+                  ),
+                  const Divider(),
                 ],
               ),
+            ),
+          ],
+        ),
+      ),
+    );
+  }
+}
+
+class EmailItem extends StatefulWidget {
+  final String title;
+  final String subtitle;
+  final String content;
+
+  const EmailItem({
+    super.key,
+    required this.title,
+    required this.subtitle,
+    required this.content,
+  });
+
+  @override
+  State<EmailItem> createState() => EmailItemState();
+}
+
+class EmailItemState extends State<EmailItem> {
+  @override
+  Widget build(BuildContext context) {
+    bool value = false;
+    return SizedBox(
+      width: double.infinity,
+      child: Padding(
+        padding: const EdgeInsets.all(16),
+        child: Column(
+          crossAxisAlignment: CrossAxisAlignment.start,
+          children: [
+            Wrap(
+              children: [
+                Toggle(
+                  value: value,
+                  onChanged: (v) {
+                    setState(() {
+                      value = v;
+                    });
+                  },
+                  child: const Icon(LucideIcons.star),
+                ),
+                Column(
+                  crossAxisAlignment: CrossAxisAlignment.start,
+                  children: [
+                    Text(widget.title).semiBold(),
+                    Gap(4),
+                    Text(widget.subtitle),
+                    Gap(4),
+                    Text(widget.content).muted().small(),
+                  ],
+                ),
+              ],
             ),
           ],
         ),
