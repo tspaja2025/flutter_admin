@@ -45,11 +45,86 @@ class SocialMediaScreenState extends State<SocialMediaScreen> {
             children: [
               SizedBox(
                 width: double.infinity,
-                child: Card(
-                  child: Column(
-                    crossAxisAlignment: .start,
-                    children: [Text("Overview")],
-                  ),
+                child: Flex(
+                  direction: .vertical,
+                  crossAxisAlignment: .start,
+                  children: [
+                    Wrap(
+                      spacing: 8,
+                      children: [
+                        Card(
+                          child: Column(
+                            crossAxisAlignment: .start,
+                            children: [
+                              const Text("Connected Accounts").semiBold(),
+                              const SizedBox(height: 16),
+                              const Text("0").bold().x2Large(),
+                              const Text(
+                                "Active social accounts",
+                              ).muted().small(),
+                            ],
+                          ),
+                        ),
+                        Card(
+                          child: Column(
+                            crossAxisAlignment: .start,
+                            children: [
+                              const Text("Scheduled Posts").semiBold(),
+                              const SizedBox(height: 16),
+                              const Text("0").bold().x2Large(),
+                              const Text("Ready to publish").muted().small(),
+                            ],
+                          ),
+                        ),
+                      ],
+                    ),
+                    const SizedBox(height: 8),
+                    Wrap(
+                      spacing: 8,
+                      children: [
+                        Card(
+                          child: Column(
+                            crossAxisAlignment: .start,
+                            children: [
+                              const Text("Published Posts").semiBold(),
+                              const SizedBox(height: 16),
+                              const Text("0").bold().x2Large(),
+                              const Text("Total published").muted().small(),
+                            ],
+                          ),
+                        ),
+                        Card(
+                          child: Column(
+                            crossAxisAlignment: .start,
+                            children: [
+                              const Text("Total Engagement").semiBold(),
+                              const SizedBox(height: 16),
+                              const Text("0").bold().x2Large(),
+                              const Text(
+                                "Likes, comments & shares",
+                              ).muted().small(),
+                            ],
+                          ),
+                        ),
+                      ],
+                    ),
+                    const SizedBox(height: 8),
+                    SizedBox(
+                      width: double.infinity,
+                      child: Card(
+                        child: Column(
+                          crossAxisAlignment: .start,
+                          children: [
+                            const Text("Recent Posts").semiBold(),
+                            const SizedBox(height: 16),
+                            const Text(
+                              "No posts yet. Create your first post to get started",
+                            ).muted(),
+                          ],
+                        ),
+                      ),
+                    ),
+                  ],
                 ),
               ),
               SizedBox(
