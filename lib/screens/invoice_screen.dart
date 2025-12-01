@@ -1,12 +1,5 @@
 import 'package:shadcn_flutter/shadcn_flutter.dart';
 
-// Clean, responsive Invoice screen using shadcn_flutter components.
-// - Normalized spacing
-// - SectionHeader + Input helpers
-// - Responsive fields (single column on narrow, 2/3 columns on wide)
-// - Line items in a compact, table-like layout
-// - Totals auto-calculated from line item values
-
 class LineItem {
   final TextEditingController description = TextEditingController();
   final TextEditingController quantity = TextEditingController(text: '1');
@@ -535,7 +528,7 @@ class _InvoiceScreenState extends State<InvoiceScreen> {
                       ],
                     ),
                   );
-                }).toList(),
+                }),
 
                 const SizedBox(height: 12),
                 const Divider(),
