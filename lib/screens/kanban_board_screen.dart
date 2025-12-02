@@ -1,10 +1,5 @@
+import 'package:flutter/material.dart' as material;
 import "package:shadcn_flutter/shadcn_flutter.dart";
-
-// TODO:
-// Fix DropdownMenu position
-// Fix Badges -> Chips
-// Fix Drag and Drop
-// Fix delete navigation
 
 // -----------------------------
 // Models
@@ -64,10 +59,10 @@ class KanbanBoardScreen extends StatefulWidget {
   const KanbanBoardScreen({super.key});
 
   @override
-  State<KanbanBoardScreen> createState() => _KanbanBoardScreenState();
+  State<KanbanBoardScreen> createState() => KanbanBoardScreenState();
 }
 
-class _KanbanBoardScreenState extends State<KanbanBoardScreen> {
+class KanbanBoardScreenState extends State<KanbanBoardScreen> {
   List<KanbanColumnData> columns = [];
 
   @override
@@ -112,12 +107,14 @@ class _KanbanBoardScreenState extends State<KanbanBoardScreen> {
 
   // Column operations
   void addColumn(String title) {
+    if (!mounted) return;
     setState(() {
       columns.add(KanbanColumnData(id: _newId(), title: title, tasks: []));
     });
   }
 
   void renameColumn(String columnId, String newTitle) {
+    if (!mounted) return;
     setState(() {
       final col = columns.firstWhere((c) => c.id == columnId);
       col.title = newTitle;
@@ -125,6 +122,7 @@ class _KanbanBoardScreenState extends State<KanbanBoardScreen> {
   }
 
   void deleteColumn(String columnId) {
+    if (!mounted) return;
     setState(() {
       columns.removeWhere((c) => c.id == columnId);
     });
@@ -132,12 +130,14 @@ class _KanbanBoardScreenState extends State<KanbanBoardScreen> {
 
   // Task operations
   void addTask(String columnId, KanbanTask task) {
+    if (!mounted) return;
     setState(() {
       columns.firstWhere((c) => c.id == columnId).tasks.add(task);
     });
   }
 
   void editTask(String columnId, KanbanTask updatedTask) {
+    if (!mounted) return;
     setState(() {
       final col = columns.firstWhere((c) => c.id == columnId);
       final idx = col.tasks.indexWhere((t) => t.id == updatedTask.id);
@@ -146,6 +146,7 @@ class _KanbanBoardScreenState extends State<KanbanBoardScreen> {
   }
 
   void deleteTask(String columnId, String taskId) {
+    if (!mounted) return;
     setState(() {
       final col = columns.firstWhere((c) => c.id == columnId);
       col.tasks.removeWhere((t) => t.id == taskId);
@@ -159,6 +160,7 @@ class _KanbanBoardScreenState extends State<KanbanBoardScreen> {
     required String taskId,
     int? toIndex,
   }) {
+    if (!mounted) return;
     if (fromColumnId == toColumnId) return;
     setState(() {
       final fromCol = columns.firstWhere((c) => c.id == fromColumnId);
@@ -184,7 +186,7 @@ class _KanbanBoardScreenState extends State<KanbanBoardScreen> {
           title: const Text("Add Column"),
           content: FormField(
             key: FormKey(#columnName),
-            label: Text("Column name"),
+            label: const Text("Column name"),
             child: TextField(controller: controller),
           ),
           actions: [
@@ -211,9 +213,9 @@ class _KanbanBoardScreenState extends State<KanbanBoardScreen> {
   @override
   Widget build(BuildContext context) {
     return Padding(
-      padding: const EdgeInsets.all(16),
+      padding: const .all(16),
       child: Column(
-        crossAxisAlignment: CrossAxisAlignment.start,
+        crossAxisAlignment: .start,
         children: [
           // Top actions
           Row(
@@ -236,14 +238,15 @@ class _KanbanBoardScreenState extends State<KanbanBoardScreen> {
             child: SingleChildScrollView(
               scrollDirection: Axis.horizontal,
               child: Row(
-                crossAxisAlignment: CrossAxisAlignment.start,
+                crossAxisAlignment: .start,
                 children: columns
                     .map(
                       (col) => Padding(
-                        padding: const EdgeInsets.only(right: 16),
+                        padding: const .only(right: 16),
                         child: KanbanColumnWidget(
                           key: ValueKey(col.id),
                           column: col,
+                          columnId: col.id,
                           onAddTask: (task) => addTask(col.id, task),
                           onEditTask: (task) => editTask(col.id, task),
                           onDeleteTask: (taskId) => deleteTask(col.id, taskId),
@@ -279,6 +282,7 @@ typedef MoveTaskFromCallback =
 
 class KanbanColumnWidget extends StatelessWidget {
   final KanbanColumnData column;
+  final String columnId;
   final AddTaskCallback onAddTask;
   final EditTaskCallback onEditTask;
   final DeleteTaskCallback onDeleteTask;
@@ -289,6 +293,7 @@ class KanbanColumnWidget extends StatelessWidget {
   const KanbanColumnWidget({
     super.key,
     required this.column,
+    required this.columnId,
     required this.onAddTask,
     required this.onEditTask,
     required this.onDeleteTask,
@@ -302,10 +307,7 @@ class KanbanColumnWidget extends StatelessWidget {
     final result = await showDialog<KanbanTask>(
       context: context,
       builder: (context) {
-        return TaskDialog(
-          // pass null => create mode
-          initialTask: null,
-        );
+        return const TaskDialog();
       },
     );
 
@@ -323,16 +325,16 @@ class KanbanColumnWidget extends StatelessWidget {
           children: [
             // Header
             Padding(
-              padding: const EdgeInsets.symmetric(horizontal: 8, vertical: 8),
+              padding: const .symmetric(horizontal: 8, vertical: 8),
               child: Row(
-                mainAxisAlignment: MainAxisAlignment.spaceBetween,
+                mainAxisAlignment: .spaceBetween,
                 children: [
                   Wrap(
                     spacing: 8,
-                    crossAxisAlignment: WrapCrossAlignment.center,
+                    crossAxisAlignment: .center,
                     children: [
                       Text(column.title).semiBold(),
-                      PrimaryBadge(child: Text("${column.tasks.length}")),
+                      Chip(child: Text("${column.tasks.length}")),
                     ],
                   ),
                   Row(
@@ -354,7 +356,7 @@ class KanbanColumnWidget extends StatelessWidget {
                                 title: const Text("Rename Column"),
                                 content: FormField(
                                   key: FormKey(#title),
-                                  label: Text("Title"),
+                                  label: const Text("Title"),
                                   child: TextField(controller: controller),
                                 ),
                                 actions: [
@@ -378,7 +380,7 @@ class KanbanColumnWidget extends StatelessWidget {
                             onRenameColumn(newTitle);
                           }
                         },
-                        icon: Icon(LucideIcons.pencil),
+                        icon: const Icon(LucideIcons.pencil),
                       ),
                       IconButton.ghost(
                         onPressed: () async {
@@ -422,38 +424,29 @@ class KanbanColumnWidget extends StatelessWidget {
 
             // Task list with DragTargets
             Expanded(
-              child: DragTarget<Map<String, String>>(
-                // expects map {fromColumnId, taskId}
-                onWillAccept: (data) => data != null,
-                onAccept: (data) {
-                  final fromColumnId = data["fromColumnId"]!;
-                  final taskId = data["taskId"]!;
-                  onMoveTask(fromColumnId, taskId);
-                },
-                builder: (context, candidateData, rejectedData) {
-                  return ListView.builder(
-                    padding: const EdgeInsets.all(8),
-                    itemCount: column.tasks.length,
-                    itemBuilder: (context, index) {
-                      final task = column.tasks[index];
-                      return Padding(
-                        padding: const EdgeInsets.only(bottom: 8),
-                        child: LongPressDraggable<Map<String, String>>(
-                          data: {"fromColumnId": column.id, "taskId": task.id},
-                          feedback: ShadcnUI(
-                            // color: Colors.transparent,
-                            child: SizedBox(
-                              width: 300,
-                              child: KanbanTaskCard(
-                                task: task,
-                                onEdit: (_) {},
-                                onDelete: (_) {},
-                              ),
-                            ),
-                          ),
+              child: KeyedSubtree(
+                key: ValueKey(column.id),
+                child: DragTarget<Map<String, String>>(
+                  onWillAccept: (data) => data != null,
+                  onAccept: (data) {
+                    final fromColumnId = data["fromColumnId"]!;
+                    final taskId = data["taskId"]!;
+                    onMoveTask(fromColumnId, taskId);
+                  },
+                  builder: (context, candidateData, rejectedData) {
+                    return ListView.builder(
+                      key: ValueKey("list_${column.id}"),
+                      padding: const .all(8),
+                      itemCount: column.tasks.length,
+                      itemBuilder: (context, index) {
+                        final task = column.tasks[index];
+                        return Padding(
+                          padding: const .only(bottom: 8),
                           child: KanbanTaskCard(
+                            key: ValueKey(task.id),
                             task: task,
-                            onEdit: (t) async {
+                            columnId: columnId,
+                            onEdit: () async {
                               final edited = await showDialog<KanbanTask>(
                                 context: context,
                                 builder: (_) => TaskDialog(initialTask: task),
@@ -462,40 +455,42 @@ class KanbanColumnWidget extends StatelessWidget {
                                 onEditTask(edited);
                               }
                             },
-                            onDelete: (taskId) {
-                              // confirm
-                              showDialog<bool>(
+                            onDelete: () async {
+                              // Show confirmation dialog
+                              final confirmed = await showDialog<bool>(
                                 context: context,
-                                builder: (ctx) => AlertDialog(
-                                  title: const Text("Delete Task"),
-                                  content: const Text(
-                                    "Are you sure you want to delete this task?",
-                                  ),
-                                  actions: [
-                                    SecondaryButton(
-                                      onPressed: () =>
-                                          Navigator.of(ctx).pop(false),
-                                      child: const Text("Cancel"),
+                                builder: (context) {
+                                  return AlertDialog(
+                                    title: const Text("Delete task?"),
+                                    content: Text(
+                                      "Delete '${task.title}' permanently?",
                                     ),
-                                    PrimaryButton(
-                                      onPressed: () =>
-                                          Navigator.of(ctx).pop(true),
-                                      child: const Text("Delete"),
-                                    ),
-                                  ],
-                                ),
-                              ).then((confirmed) {
-                                if (confirmed == true) {
-                                  onDeleteTask(taskId);
-                                }
-                              });
+                                    actions: [
+                                      SecondaryButton(
+                                        onPressed: () =>
+                                            Navigator.of(context).pop(false),
+                                        child: const Text("Cancel"),
+                                      ),
+                                      PrimaryButton(
+                                        onPressed: () =>
+                                            Navigator.of(context).pop(true),
+                                        child: const Text("Delete"),
+                                      ),
+                                    ],
+                                  );
+                                },
+                              );
+
+                              if (confirmed == true) {
+                                onDeleteTask(task.id);
+                              }
                             },
                           ),
-                        ),
-                      );
-                    },
-                  );
-                },
+                        );
+                      },
+                    );
+                  },
+                ),
               ),
             ),
           ],
@@ -508,80 +503,115 @@ class KanbanColumnWidget extends StatelessWidget {
 // -----------------------------
 // Kanban Task Card (stateless)
 // -----------------------------
-class KanbanTaskCard extends StatelessWidget {
+class KanbanTaskCard extends StatefulWidget {
   final KanbanTask task;
-  final ValueChanged<KanbanTask> onEdit;
-  final ValueChanged<String> onDelete;
+  final String columnId;
+  final VoidCallback onEdit;
+  final VoidCallback onDelete;
 
   const KanbanTaskCard({
     super.key,
     required this.task,
+    required this.columnId,
     required this.onEdit,
     required this.onDelete,
   });
 
   @override
+  State<KanbanTaskCard> createState() => _KanbanTaskCardState();
+}
+
+class _KanbanTaskCardState extends State<KanbanTaskCard> {
+  @override
   Widget build(BuildContext context) {
+    return Draggable<Map<String, String>>(
+      data: {"fromColumnId": widget.columnId, "taskId": widget.task.id},
+      feedback: material.Material(
+        child: Card(
+          padding: const .all(12),
+          child: SizedBox(
+            width: 280,
+            child: Column(
+              crossAxisAlignment: .start,
+              mainAxisSize: .min,
+              children: [
+                Text(widget.task.title).semiBold(),
+                const SizedBox(height: 4),
+                Text(widget.task.content).small(),
+              ],
+            ),
+          ),
+        ),
+      ),
+      childWhenDragging: Opacity(opacity: 0.5, child: _buildTaskContent()),
+      child: _buildTaskContent(),
+    );
+  }
+
+  Widget _buildTaskContent() {
     return Card(
-      padding: const EdgeInsets.all(12),
+      padding: const .all(12),
       child: Column(
-        crossAxisAlignment: CrossAxisAlignment.start,
+        crossAxisAlignment: .start,
         children: [
           // Title + menu
           Row(
-            mainAxisAlignment: MainAxisAlignment.spaceBetween,
+            mainAxisAlignment: .spaceBetween,
             children: [
-              Text(task.title).semiBold(),
-              IconButton.ghost(
-                onPressed: () {
-                  showDropdown(
-                    context: context,
-                    builder: (ctx) {
-                      return DropdownMenu(
-                        children: [
-                          MenuButton(
-                            onPressed: (_) async {
-                              // close dropdown then open edit
-                              Navigator.of(ctx).pop();
-                              final edited = await showDialog<KanbanTask>(
-                                context: context,
-                                builder: (context) =>
-                                    TaskDialog(initialTask: task),
-                              );
-                              if (edited != null) onEdit(edited);
-                            },
-                            leading: const Icon(LucideIcons.pencil),
-                            child: const Text("Edit"),
-                          ),
-                          MenuButton(
-                            onPressed: (_) {
-                              Navigator.of(ctx).pop();
-                              onDelete(task.id);
-                            },
-                            leading: const Icon(LucideIcons.trash),
-                            child: const Text("Delete"),
-                          ),
-                        ],
-                      );
-                    },
-                  );
+              Expanded(child: Text(widget.task.title).semiBold()),
+              // Use PopupMenuButton instead of custom dropdown
+              material.PopupMenuButton<String>(
+                color: Theme.of(context).colorScheme.secondary,
+                onSelected: (value) {
+                  if (value == 'edit') {
+                    widget.onEdit();
+                  } else if (value == 'delete') {
+                    widget.onDelete();
+                  }
                 },
-                icon: const Icon(LucideIcons.ellipsisVertical),
+                itemBuilder: (BuildContext context) {
+                  return [
+                    const material.PopupMenuItem<String>(
+                      value: 'edit',
+                      child: Row(
+                        children: [
+                          Icon(LucideIcons.pencil, size: 16),
+                          SizedBox(width: 8),
+                          Text('Edit', style: TextStyle(color: Colors.white)),
+                        ],
+                      ),
+                    ),
+                    const material.PopupMenuItem<String>(
+                      value: 'delete',
+                      child: Row(
+                        children: [
+                          Icon(LucideIcons.trash, size: 16),
+                          SizedBox(width: 8),
+                          Text('Delete', style: TextStyle(color: Colors.white)),
+                        ],
+                      ),
+                    ),
+                  ];
+                },
+                child: IconButton.ghost(
+                  onPressed: null, // The PopupMenuButton handles the press
+                  icon: const Icon(LucideIcons.ellipsisVertical),
+                ),
               ),
             ],
           ),
           const SizedBox(height: 8),
-          Text(task.content).small(),
+          Text(widget.task.content).small(),
           const SizedBox(height: 12),
           Row(
-            mainAxisAlignment: MainAxisAlignment.spaceBetween,
+            mainAxisAlignment: .spaceBetween,
             children: [
-              Text(task.date).xSmall(),
+              Text(widget.task.date).xSmall(),
               Chip(
                 style: ButtonStyle.primary()
-                    .withBackgroundColor(color: task.priorityColor)
+                    .withBackgroundColor(color: widget.task.priorityColor)
                     .withForegroundColor(color: Colors.white),
-                child: Text(task.priority),
+                child: Text(widget.task.priority),
               ),
             ],
           ),
@@ -663,12 +693,12 @@ class TaskDialogState extends State<TaskDialog> {
       content: ConstrainedBox(
         constraints: const BoxConstraints(maxWidth: 480),
         child: Column(
-          mainAxisSize: MainAxisSize.min,
-          crossAxisAlignment: CrossAxisAlignment.start,
+          mainAxisSize: .min,
+          crossAxisAlignment: .start,
           children: [
             Form(
               child: Column(
-                crossAxisAlignment: CrossAxisAlignment.start,
+                crossAxisAlignment: .start,
                 children: [
                   const Text("Title"),
                   const SizedBox(height: 6),
@@ -712,17 +742,6 @@ class TaskDialogState extends State<TaskDialog> {
                       ),
                     ),
                   ),
-                  // DropdownButtonFormField<String>(
-                  //   value: _priority,
-                  //   items: const [
-                  //     DropdownMenuItem(value: "Low", child: Text("Low")),
-                  //     DropdownMenuItem(value: "Medium", child: Text("Medium")),
-                  //     DropdownMenuItem(value: "High", child: Text("High")),
-                  //   ],
-                  //   onChanged: (v) {
-                  //     if (v != null) setState(() => _priority = v);
-                  //   },
-                  // ),
                 ],
               ),
             ),
@@ -742,333 +761,3 @@ class TaskDialogState extends State<TaskDialog> {
     );
   }
 }
-
-// class KanbanBoardScreen extends StatefulWidget {
-//   const KanbanBoardScreen({super.key});
-
-//   @override
-//   State<KanbanBoardScreen> createState() => KanbanBoardScreenState();
-// }
-
-// class KanbanBoardScreenState extends State<KanbanBoardScreen> {
-//   @override
-//   Widget build(BuildContext context) {
-//     return Padding(
-//       padding: const .all(16),
-//       child: Column(
-//         crossAxisAlignment: .start,
-//         children: [
-//           Flex(
-//             direction: .horizontal,
-//             spacing: 8,
-//             children: [
-//               OutlineButton(
-//                 onPressed: () {},
-//                 density: .icon,
-//                 leading: const Icon(LucideIcons.plus),
-//                 child: const Text("Add Column"),
-//               ),
-//             ],
-//           ),
-//           const SizedBox(height: 8),
-//           // Example columns
-//           Flex(
-//             direction: .horizontal,
-//             crossAxisAlignment: .start,
-//             spacing: 16,
-//             children: [
-//               KanbanColumn(
-//                 columnTitle: "Review",
-//                 children: [
-//                   KanbanColumnItem(
-//                     title: "Design System Setup",
-//                     content:
-//                         "Create a comprehensive design system with colors, typography and components",
-//                     date: "19/11/2025",
-//                     priority: "High",
-//                     priorityColor: Colors.red,
-//                   ),
-//                   const SizedBox(height: 8),
-//                   KanbanColumnItem(
-//                     title: "API Integration",
-//                     content: "Integrate with backgend APIs for data fetching",
-//                     date: "19/11/2025",
-//                     priority: "High",
-//                     priorityColor: Colors.gray,
-//                   ),
-//                 ],
-//               ),
-//               KanbanColumn(
-//                 columnTitle: "Review",
-//                 children: [
-//                   KanbanColumnItem(
-//                     title: "User Authentication",
-//                     content: "Implement login and signup functionality",
-//                     date: "19/11/2025",
-//                     priority: "High",
-//                     priorityColor: Colors.red,
-//                   ),
-//                 ],
-//               ),
-//             ],
-//           ),
-//           const SizedBox(height: 16),
-//           Flex(
-//             direction: .horizontal,
-//             spacing: 16,
-//             children: [
-//               KanbanColumn(
-//                 columnTitle: "Review",
-//                 children: [
-//                   KanbanColumnItem(
-//                     title: "Mobile Responsiveness",
-//                     content: "Ensure the app works perfectly on mobile devices",
-//                     date: "19/11/2025",
-//                     priority: "High",
-//                     priorityColor: Colors.red,
-//                   ),
-//                 ],
-//               ),
-//               KanbanColumn(
-//                 columnTitle: "Done",
-//                 children: [
-//                   KanbanColumnItem(
-//                     title: "Project Setup",
-//                     content: "Initialize Flutter project",
-//                     date: "19/11/2025",
-//                     priority: "Low",
-//                     priorityColor: Colors.blue,
-//                   ),
-//                 ],
-//               ),
-//             ],
-//           ),
-//         ],
-//       ),
-//     );
-//   }
-// }
-
-// class KanbanColumn extends StatefulWidget {
-//   final String columnTitle;
-//   final List<Widget> children;
-
-//   const KanbanColumn({
-//     super.key,
-//     required this.columnTitle,
-//     required this.children,
-//   });
-
-//   @override
-//   State<KanbanColumn> createState() => KanbanColumnState();
-// }
-
-// class KanbanColumnState extends State<KanbanColumn> {
-//   final _titleKey = const TextFieldKey(#title);
-//   final _descriptionKey = const TextFieldKey(#description);
-//   String? _selectedValue;
-
-//   @override
-//   Widget build(BuildContext context) {
-//     return Expanded(
-//       child: Card(
-//         child: Column(
-//           children: [
-//             Row(
-//               mainAxisAlignment: .spaceBetween,
-//               children: [
-//                 Wrap(
-//                   spacing: 8,
-//                   children: [
-//                     Text(widget.columnTitle),
-//                     PrimaryBadge(child: const Text("2")),
-//                   ],
-//                 ),
-//                 IconButton.ghost(
-//                   onPressed: () {
-//                     showDialog(
-//                       context: context,
-//                       builder: (context) {
-//                         final FormController controller = FormController();
-
-//                         return AlertDialog(
-//                           title: const Text("Add Task"),
-//                           content: Column(
-//                             mainAxisSize: .min,
-//                             crossAxisAlignment: .start,
-//                             children: [
-//                               ConstrainedBox(
-//                                 constraints: const BoxConstraints(
-//                                   maxWidth: 400,
-//                                 ),
-//                                 child: Form(
-//                                   controller: controller,
-//                                   child: Column(
-//                                     crossAxisAlignment: .start,
-//                                     children: [
-//                                       FormField(
-//                                         key: _titleKey,
-//                                         label: const Text("Title"),
-//                                         child: const TextField(),
-//                                       ),
-//                                       const SizedBox(height: 12),
-//                                       FormField(
-//                                         key: _descriptionKey,
-//                                         label: const Text("Description"),
-//                                         child: const TextField(),
-//                                       ),
-//                                       const SizedBox(height: 12),
-//                                       Select<String>(
-//                                         itemBuilder: (context, item) {
-//                                           return Text(item);
-//                                         },
-//                                         popupConstraints: const BoxConstraints(
-//                                           maxHeight: 300,
-//                                           maxWidth: 200,
-//                                         ),
-//                                         onChanged: (value) {
-//                                           setState(() {
-//                                             _selectedValue = value;
-//                                           });
-//                                         },
-//                                         value: _selectedValue,
-//                                         placeholder: const Text("Priority"),
-//                                         popup: const SelectPopup(
-//                                           items: SelectItemList(
-//                                             children: [
-//                                               SelectItemButton(
-//                                                 value: "Low",
-//                                                 child: Text("Low"),
-//                                               ),
-//                                               SelectItemButton(
-//                                                 value: "Medium",
-//                                                 child: Text("Medium"),
-//                                               ),
-//                                               SelectItemButton(
-//                                                 value: "High",
-//                                                 child: Text("High"),
-//                                               ),
-//                                             ],
-//                                           ),
-//                                         ),
-//                                       ),
-//                                     ],
-//                                   ),
-//                                 ),
-//                               ),
-//                             ],
-//                           ),
-//                           actions: [
-//                             SecondaryButton(
-//                               child: const Text("Cancel"),
-//                               onPressed: () {
-//                                 Navigator.of(context).pop(controller.values);
-//                               },
-//                             ),
-//                             PrimaryButton(
-//                               child: const Text("Save changes"),
-//                               onPressed: () {
-//                                 Navigator.of(context).pop(controller.values);
-//                               },
-//                             ),
-//                           ],
-//                         );
-//                       },
-//                     );
-//                   },
-//                   density: ButtonDensity.icon,
-//                   icon: const Icon(LucideIcons.plus),
-//                 ),
-//               ],
-//             ),
-//             const SizedBox(height: 8),
-//             ...widget.children,
-//           ],
-//         ),
-//       ),
-//     );
-//   }
-// }
-
-// class KanbanColumnItem extends StatefulWidget {
-//   final String title;
-//   final String content;
-//   final String date;
-//   final String priority;
-//   final Color? priorityColor;
-
-//   const KanbanColumnItem({
-//     super.key,
-//     required this.title,
-//     required this.content,
-//     required this.date,
-//     required this.priority,
-//     required this.priorityColor,
-//   });
-
-//   @override
-//   State<KanbanColumnItem> createState() => KanbanColumnItemState();
-// }
-
-// class KanbanColumnItemState extends State<KanbanColumnItem> {
-//   @override
-//   Widget build(BuildContext context) {
-//     return Card(
-//       padding: const .all(8),
-//       child: Column(
-//         crossAxisAlignment: .start,
-//         children: [
-//           Row(
-//             mainAxisAlignment: .spaceBetween,
-//             children: [
-//               Text(widget.title).small(),
-//               Builder(
-//                 builder: (context) {
-//                   return IconButton.ghost(
-//                     onPressed: () {
-//                       showDropdown(
-//                         context: context,
-//                         builder: (context) {
-//                           return DropdownMenu(
-//                             children: [
-//                               MenuButton(
-//                                 onPressed: (_) {},
-//                                 leading: const Icon(LucideIcons.pencil),
-//                                 child: const Text("Edit"),
-//                               ),
-//                               MenuButton(
-//                                 onPressed: (_) {},
-//                                 leading: const Icon(LucideIcons.trash),
-//                                 child: const Text("Delete"),
-//                               ),
-//                             ],
-//                           );
-//                         },
-//                       );
-//                     },
-//                     icon: const Icon(LucideIcons.ellipsisVertical),
-//                   );
-//                 },
-//               ),
-//             ],
-//           ),
-//           const SizedBox(height: 16),
-//           Text(widget.content).small(),
-//           const SizedBox(height: 16),
-//           Row(
-//             mainAxisAlignment: .spaceBetween,
-//             children: [
-//               Text(widget.date).xSmall(),
-//               Chip(
-//                 style: ButtonStyle.primary()
-//                     .withBackgroundColor(color: widget.priorityColor)
-//                     .withForegroundColor(color: Colors.white),
-//                 child: Text(widget.priority),
-//               ),
-//             ],
-//           ),
-//         ],
-//       ),
-//     );
-//   }
-// }

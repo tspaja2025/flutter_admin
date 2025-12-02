@@ -2,6 +2,9 @@ import 'package:flutter_admin/screens/default_screen.dart';
 import 'package:shadcn_flutter/shadcn_flutter.dart';
 
 void main() {
+  FlutterError.onError = (details) {
+    FlutterError.presentError(details);
+  };
   runApp(const MyApp());
 }
 
