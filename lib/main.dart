@@ -2,33 +2,22 @@ import 'package:flutter_admin/screens/default_screen.dart';
 import 'package:shadcn_flutter/shadcn_flutter.dart';
 
 void main() {
-  FlutterError.onError = (details) {
-    FlutterError.presentError(details);
-  };
-  runApp(const MyApp());
+  runApp(const ProjectsApp());
 }
 
-class MyApp extends StatefulWidget {
-  const MyApp({super.key});
+class ProjectsApp extends StatefulWidget {
+  const ProjectsApp({super.key});
 
   @override
-  State<MyApp> createState() => MyAppState();
+  State<ProjectsApp> createState() => ProjectsAppState();
 }
 
-class MyAppState extends State<MyApp> {
-  ThemeMode _themeMode = ThemeMode.system;
-
-  void _changeTheme(ThemeMode mode) {
-    setState(() {
-      _themeMode = mode;
-    });
-  }
-
+class ProjectsAppState extends State<ProjectsApp> {
   @override
   Widget build(BuildContext context) {
     return ShadcnApp(
       debugShowCheckedModeBanner: false,
-      themeMode: _themeMode,
+      themeMode: ThemeMode.dark,
       theme: ThemeData(
         colorScheme: ColorSchemes.lightDefaultColor,
         radius: 0.5,
@@ -52,7 +41,7 @@ class MyAppState extends State<MyApp> {
         ),
       ),
       title: "Flutter Admin",
-      home: DefaultScreen(onThemeChanged: _changeTheme),
+      home: const DefaultScreen(),
     );
   }
 }
