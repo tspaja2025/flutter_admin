@@ -91,10 +91,6 @@ class DefaultScreenState extends State<DefaultScreen> {
                     _buildNavigationButton("Mail", LucideIcons.mail),
                     _buildNavigationButton("Notes", LucideIcons.stickyNote),
                     _buildNavigationButton("QR Generator", LucideIcons.qrCode),
-                    _buildNavigationButton(
-                      "Social Manager",
-                      LucideIcons.messageCircle,
-                    ),
                     _buildNavigationButton("To Do", LucideIcons.listTodo),
                   ],
                 ),

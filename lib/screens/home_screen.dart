@@ -50,11 +50,6 @@ class HomeScreen extends StatelessWidget {
       "description": "Generate custom QR codes.",
     },
     {
-      "title": "Social Media",
-      "icon": LucideIcons.messageCircle,
-      "description": "Interact and share with your network.",
-    },
-    {
       "title": "To-Do",
       "icon": LucideIcons.listTodo,
       "description": "Track tasks and mark progress.",
@@ -87,7 +82,7 @@ class HomeScreen extends StatelessWidget {
                       crossAxisCount: crossAxisCount,
                       mainAxisSpacing: 16,
                       crossAxisSpacing: 16,
-                      childAspectRatio: 1.1,
+                      childAspectRatio: 1.5,
                     ),
                     itemCount: projects.length,
                     itemBuilder: (context, index) {
