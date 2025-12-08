@@ -25,155 +25,162 @@ class QrGeneratorScreenState extends State<QrGeneratorScreen> {
               crossAxisAlignment: .start,
               spacing: 8,
               children: [
-                Expanded(
-                  child: Card(
-                    child: Column(
-                      crossAxisAlignment: .start,
-                      children: [
-                        const Text("Configure your QR code").semiBold(),
-                        const SizedBox(height: 8),
-                        const Text(
-                          "Enter your content and customzie the appearance",
-                        ).muted().small(),
-                        const SizedBox(height: 16),
-                        FormField(
-                          key: FormKey(#content),
-                          label: const Text("Content"),
-                          child: TextField(),
-                        ),
-                        const SizedBox(height: 8),
-                        FormField(
-                          key: FormKey(#smsNumber),
-                          label: const Text("SMS Number"),
-                          child: TextField(),
-                        ),
-                        const SizedBox(height: 8),
-                        FormField(
-                          key: FormKey(#wifiConfiguration),
-                          label: const Text("WiFi Configuration"),
-                          trailingLabel: const Text(
-                            "Format: WIFI:T:WPA;S:NetworkName;P:Password;;",
-                          ),
-                          child: TextField(),
-                        ),
-                        const SizedBox(height: 8),
-                        const Text("Settings").semiBold(),
-                        const SizedBox(height: 16),
-                        Text("Size: ${value.start} px"),
-                        Slider(
-                          value: value,
-                          min: 128,
-                          max: 512,
-                          divisions: 12,
-                          onChanged: (value) {
-                            setState(() {
-                              this.value = value;
-                            });
-                          },
-                        ),
-                        const SizedBox(height: 8),
-                        FormField(
-                          key: FormKey(#foregroundColor),
-                          label: const Text("Foreground Color"),
-                          child: SizedBox(
-                            width: 32,
-                            height: 32,
-                            child: ColorInput(
-                              value: foregroundColor,
-                              orientation: .horizontal,
-                              promptMode: .popover,
-                              onChanged: (value) {
-                                setState(() {
-                                  foregroundColor = value;
-                                });
-                              },
-                            ),
-                          ),
-                        ),
-                        const SizedBox(height: 8),
-                        FormField(
-                          key: FormKey(#backgroundColor),
-                          label: const Text("Background Color"),
-                          child: SizedBox(
-                            width: 32,
-                            height: 32,
-                            child: ColorInput(
-                              value: foregroundColor,
-                              orientation: .horizontal,
-                              promptMode: .popover,
-                              onChanged: (value) {
-                                setState(() {
-                                  foregroundColor = value;
-                                });
-                              },
-                            ),
-                          ),
-                        ),
-                        const SizedBox(height: 8),
-                        FormField(
-                          key: FormKey(#logo),
-                          label: const Text("Logo (optional)"),
-                          child: TextField(
-                            placeholder: const Text("change to file picker"),
-                          ),
-                        ),
-                        const SizedBox(height: 8),
-                        PrimaryButton(
-                          onPressed: () {},
-                          child: const Text("Reset"),
-                        ),
-                      ],
-                    ),
-                  ),
-                ),
-                Expanded(
-                  child: Card(
-                    child: Column(
-                      crossAxisAlignment: .start,
-                      children: [
-                        const Text("Preview and Download").semiBold(),
-                        const SizedBox(height: 8),
-                        const Text(
-                          "Your QR code will appear here",
-                        ).muted().small(),
-                        const SizedBox(height: 16),
-                        QrImageView(
-                          data: '1234567890',
-                          version: QrVersions.auto,
-                          size: 200.0,
-                        ),
-                        const SizedBox(height: 16),
-                        PrimaryButton(
-                          onPressed: () {
-                            showDropdown(
-                              context: context,
-                              builder: (context) {
-                                return DropdownMenu(
-                                  children: [
-                                    MenuButton(
-                                      onPressed: (_) {},
-                                      child: const Text("PNG"),
-                                    ),
-                                    MenuButton(
-                                      onPressed: (_) {},
-                                      child: const Text("SVG"),
-                                    ),
-                                  ],
-                                );
-                              },
-                            );
-                          },
-                          leading: const Icon(LucideIcons.download),
-                          child: const Text("Download"),
-                        ),
-                      ],
-                    ),
-                  ),
-                ),
+                Expanded(child: _buildSettingsCard()),
+                Expanded(child: _buildPreviewCard()),
               ],
             ),
           ],
         ),
+      ),
+    );
+  }
+
+  Widget _buildSettingsCard() {
+    return Card(
+      child: Column(
+        crossAxisAlignment: .start,
+        children: [
+          const Text("Configure your QR code").semiBold(),
+          const SizedBox(height: 8),
+          const Text(
+            "Enter your content and customzie the appearance",
+          ).muted().small(),
+          const SizedBox(height: 16),
+          FormField(
+            key: FormKey(#content),
+            label: const Text("Content"),
+            child: TextField(),
+          ),
+          const SizedBox(height: 8),
+          FormField(
+            key: FormKey(#smsNumber),
+            label: const Text("SMS Number"),
+            child: TextField(),
+          ),
+          const SizedBox(height: 8),
+          FormField(
+            key: FormKey(#wifiConfiguration),
+            label: const Text("WiFi Configuration"),
+            trailingLabel: const Text(
+              "Format: WIFI:T:WPA;S:NetworkName;P:Password;;",
+            ),
+            child: TextField(),
+          ),
+          const SizedBox(height: 8),
+          const Text("Settings").semiBold(),
+          const SizedBox(height: 16),
+          Text("Size: ${value.start} px"),
+          Slider(
+            value: value,
+            min: 128,
+            max: 512,
+            divisions: 12,
+            onChanged: (value) {
+              setState(() {
+                this.value = value;
+              });
+            },
+          ),
+          const SizedBox(height: 8),
+          Row(
+            children: [
+              Expanded(
+                child: FormField(
+                  key: FormKey(#foregroundColor),
+                  label: const Text("Foreground Color"),
+                  child: SizedBox(
+                    width: 32,
+                    height: 32,
+                    child: ColorInput(
+                      value: foregroundColor,
+                      orientation: .horizontal,
+                      promptMode: .popover,
+                      onChanged: (value) {
+                        setState(() {
+                          foregroundColor = value;
+                        });
+                      },
+                    ),
+                  ),
+                ),
+              ),
+              Expanded(
+                child: FormField(
+                  key: FormKey(#backgroundColor),
+                  label: const Text("Background Color"),
+                  child: SizedBox(
+                    width: 32,
+                    height: 32,
+                    child: ColorInput(
+                      value: foregroundColor,
+                      orientation: .horizontal,
+                      promptMode: .popover,
+                      onChanged: (value) {
+                        setState(() {
+                          foregroundColor = value;
+                        });
+                      },
+                    ),
+                  ),
+                ),
+              ),
+            ],
+          ),
+          const SizedBox(height: 8),
+          FormField(
+            key: FormKey(#logo),
+            label: const Text("Logo (optional)"),
+            child: TextField(placeholder: const Text("Choose file")),
+          ),
+          const SizedBox(height: 8),
+          OutlineButton(onPressed: () {}, child: const Text("Reset")),
+        ],
+      ),
+    );
+  }
+
+  Widget _buildPreviewCard() {
+    return Card(
+      child: Column(
+        crossAxisAlignment: .start,
+        children: [
+          const Text("Preview and Download").semiBold(),
+          const SizedBox(height: 8),
+          const Text("Your QR code will appear here").muted().small(),
+          const SizedBox(height: 24),
+          Center(
+            child: Container(
+              padding: const .all(16),
+              decoration: BoxDecoration(
+                border: Border.all(color: Colors.gray.shade200),
+                borderRadius: .circular(12),
+              ),
+              child: QrImageView(
+                data: '1234567890',
+                version: QrVersions.auto,
+                size: 200.0,
+              ),
+            ),
+          ),
+          const SizedBox(height: 16),
+          PrimaryButton(
+            onPressed: () {
+              showDropdown(
+                context: context,
+                builder: (context) {
+                  return DropdownMenu(
+                    children: [
+                      MenuButton(onPressed: (_) {}, child: const Text("PNG")),
+                      MenuButton(onPressed: (_) {}, child: const Text("SVG")),
+                    ],
+                  );
+                },
+              );
+            },
+            leading: const Icon(LucideIcons.download),
+            child: const Text("Download"),
+          ),
+        ],
       ),
     );
   }

@@ -4,8 +4,6 @@ import 'package:shared_preferences/shared_preferences.dart';
 import 'package:flutter/foundation.dart';
 import 'package:shadcn_flutter/shadcn_flutter.dart';
 
-// Add feedback to key clipboard copy.
-
 enum DialogState { idle, loading, created }
 
 class ApiKeysScreen extends StatefulWidget {
