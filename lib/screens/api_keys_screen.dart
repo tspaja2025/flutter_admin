@@ -4,6 +4,9 @@ import 'package:shared_preferences/shared_preferences.dart';
 import 'package:flutter/foundation.dart';
 import 'package:shadcn_flutter/shadcn_flutter.dart';
 
+// TODO:
+// API Table does not really work on mobile
+
 enum DialogState { idle, loading, created }
 
 class ApiKeysScreen extends StatefulWidget {
@@ -169,33 +172,30 @@ class ApiKeysScreenState extends State<ApiKeysScreen> {
               SizedBox(
                 width: double.infinity,
                 child: Card(
-                  child: Padding(
-                    padding: const .all(8),
-                    child: Column(
-                      crossAxisAlignment: .start,
-                      children: [
-                        const Text("Your API Keys").semiBold(),
-                        const SizedBox(height: 4),
-                        const Text(
-                          "Manage and monitor your API keys.",
-                        ).muted().small(),
-                        const SizedBox(height: 16),
-                        Row(
-                          mainAxisAlignment: .center,
-                          children: [
-                            Column(
-                              children: [
-                                const Text("No API keys yet.").bold().large(),
-                                const SizedBox(height: 4),
-                                const Text(
-                                  "Create your first API key to get started.",
-                                ).muted().small(),
-                              ],
-                            ),
-                          ],
-                        ),
-                      ],
-                    ),
+                  child: Column(
+                    crossAxisAlignment: .start,
+                    children: [
+                      const Text("Your API Keys").semiBold(),
+                      const SizedBox(height: 4),
+                      const Text(
+                        "Manage and monitor your API keys.",
+                      ).muted().small(),
+                      const SizedBox(height: 24),
+                      Row(
+                        mainAxisAlignment: .center,
+                        children: [
+                          Column(
+                            children: [
+                              const Text("No API keys yet.").bold().large(),
+                              const SizedBox(height: 4),
+                              const Text(
+                                "Create your first API key to get started.",
+                              ).muted().small(),
+                            ],
+                          ),
+                        ],
+                      ),
+                    ],
                   ),
                 ),
               )

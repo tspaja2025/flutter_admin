@@ -1,6 +1,8 @@
 import 'package:shadcn_flutter/shadcn_flutter.dart';
 
+// TODO:
 // Fix event positioning on week / day view
+// Overflow issue
 
 class CalendarScreen extends StatefulWidget {
   const CalendarScreen({super.key});

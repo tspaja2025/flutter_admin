@@ -1,5 +1,8 @@
 import 'package:shadcn_flutter/shadcn_flutter.dart';
 
+// TODO:
+// Invoice table does not really work on mobile
+
 class InvoiceManagerScreen extends StatefulWidget {
   const InvoiceManagerScreen({super.key});
 
@@ -403,7 +406,6 @@ class InvoiceManagerScreenState extends State<InvoiceManagerScreen> {
                       child: Container(
                         padding: const .all(8),
                         child: PrimaryBadge(
-                          // variant: _getStatusBadgeVariant(invoice.status),
                           child: Text(
                             invoice.status.toString().split('.').last,
                           ),
@@ -860,19 +862,6 @@ class InvoiceManagerScreenState extends State<InvoiceManagerScreen> {
   String _formatDate(DateTime date) {
     return '${date.day.toString().padLeft(2, '0')}/${date.month.toString().padLeft(2, '0')}/${date.year}';
   }
-
-  // BadgeVariant _getStatusBadgeVariant(InvoiceStatus status) {
-  //   switch (status) {
-  //     case InvoiceStatus.draft:
-  //       return BadgeVariant.outline;
-  //     case InvoiceStatus.sent:
-  //       return BadgeVariant.secondary;
-  //     case InvoiceStatus.paid:
-  //       return BadgeVariant.success;
-  //     case InvoiceStatus.overdue:
-  //       return BadgeVariant.destructive;
-  //   }
-  // }
 
   @override
   void dispose() {

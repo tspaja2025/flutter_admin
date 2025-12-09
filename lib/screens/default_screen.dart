@@ -51,27 +51,16 @@ class DefaultScreenState extends State<DefaultScreen> {
               children: [
                 NavigationRail(
                   alignment: .start,
-                  backgroundColor: Theme.of(context).colorScheme.card,
-                  labelType: .expanded,
-                  labelPosition: .end,
-                  expanded: expanded,
+                  labelType: .none,
                   index: selected,
-                  onSelected: (int value) {
+                  labelPosition: .bottom,
+                  expanded: expanded,
+                  onSelected: (index) {
                     setState(() {
-                      selected = value;
+                      selected = index;
                     });
                   },
                   children: [
-                    NavigationButton(
-                      alignment: .centerLeft,
-                      onPressed: () {
-                        setState(() {
-                          expanded = !expanded;
-                        });
-                      },
-                      child: const Icon(LucideIcons.menu),
-                    ),
-                    const NavigationDivider(),
                     _buildNavigationButton("Home", LucideIcons.house),
                     _buildNavigationButton("API Keys", LucideIcons.key),
                     _buildNavigationButton("Calendar", LucideIcons.calendar),
@@ -105,16 +94,7 @@ class DefaultScreenState extends State<DefaultScreen> {
     );
   }
 
-  NavigationItem _buildNavigationButton(String text, IconData icon) {
-    return NavigationItem(
-      label: Text(text),
-      alignment: .centerLeft,
-      selectedStyle: const ButtonStyle.primaryIcon(),
-      child: Tooltip(
-        alignment: .centerRight,
-        tooltip: (_) => TooltipContainer(child: Text(text)),
-        child: Icon(icon),
-      ),
-    );
+  NavigationItem _buildNavigationButton(String label, IconData icon) {
+    return NavigationItem(label: Text(label), child: Icon(icon));
   }
 }

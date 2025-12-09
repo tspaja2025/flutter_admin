@@ -1,6 +1,9 @@
 import 'package:qr_flutter/qr_flutter.dart';
 import 'package:shadcn_flutter/shadcn_flutter.dart';
 
+// TODO:
+// Overflow issue
+
 class QrGeneratorScreen extends StatefulWidget {
   const QrGeneratorScreen({super.key});
 

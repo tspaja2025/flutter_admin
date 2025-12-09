@@ -73,9 +73,9 @@ class HomeScreen extends StatelessWidget {
                   final width = constraints.maxWidth;
                   final crossAxisCount = width > 1000
                       ? 4
-                      : width > 700
-                      ? 3
-                      : 2;
+                      : width > 480
+                      ? 2
+                      : 1;
 
                   return GridView.builder(
                     gridDelegate: SliverGridDelegateWithFixedCrossAxisCount(
