@@ -1,11 +1,8 @@
-import 'dart:convert';
-import 'dart:math';
-import 'package:shared_preferences/shared_preferences.dart';
-import 'package:flutter/foundation.dart';
-import 'package:shadcn_flutter/shadcn_flutter.dart';
-
-// TODO:
-// API Table does not really work on mobile
+import "dart:convert";
+import "dart:math";
+import "package:shared_preferences/shared_preferences.dart";
+import "package:flutter/foundation.dart";
+import "package:shadcn_flutter/shadcn_flutter.dart";
 
 enum DialogState { idle, loading, created }
 
@@ -343,25 +340,25 @@ class ApiKey {
   // Convert to/from JSON for storage
   Map<String, dynamic> toJson() {
     return {
-      'id': id,
-      'key': key,
-      'name': name,
-      'createdAt': createdAt.toIso8601String(),
-      'lastUsedAt': lastUsedAt?.toIso8601String(),
-      'isActive': isActive,
+      "id": id,
+      "key": key,
+      "name": name,
+      "createdAt": createdAt.toIso8601String(),
+      "lastUsedAt": lastUsedAt?.toIso8601String(),
+      "isActive": isActive,
     };
   }
 
   factory ApiKey.fromJson(Map<String, dynamic> json) {
     return ApiKey(
-      id: json['id'],
-      key: json['key'],
-      name: json['name'],
-      createdAt: DateTime.parse(json['createdAt']),
-      lastUsedAt: json['lastUsedAt'] != null
-          ? DateTime.parse(json['lastUsedAt'])
+      id: json["id"],
+      key: json["key"],
+      name: json["name"],
+      createdAt: DateTime.parse(json["createdAt"]),
+      lastUsedAt: json["lastUsedAt"] != null
+          ? DateTime.parse(json["lastUsedAt"])
           : null,
-      isActive: json['isActive'] ?? true,
+      isActive: json["isActive"] ?? true,
     );
   }
 
@@ -387,7 +384,7 @@ class ApiKey {
 
 // Api Key Service
 class ApiKeyService {
-  static const String _storageKey = 'api_keys';
+  static const String _storageKey = "api_keys";
 
   // Generate a secure API key
   static String generateApiKey() {
@@ -407,7 +404,7 @@ class ApiKeyService {
   // Mask API key for security
   static String maskApiKey(String prefix, {int totalLength = 32}) {
     final maskedLength = totalLength - prefix.length;
-    return prefix + '*' * (maskedLength > 0 ? maskedLength : 0);
+    return prefix + "*" * (maskedLength > 0 ? maskedLength : 0);
   }
 
   // Get all API Keys from storage
@@ -421,7 +418,7 @@ class ApiKeyService {
       return jsonList.map((json) => ApiKey.fromJson(json)).toList();
     } catch (e) {
       if (kDebugMode) {
-        print('Error reading API keys: $e');
+        print("Error reading API keys: $e");
       }
       return [];
     }
@@ -435,9 +432,9 @@ class ApiKeyService {
       await prefs.setString(_storageKey, json.encode(jsonList));
     } catch (e) {
       if (kDebugMode) {
-        print('Error saving API keys: $e');
+        print("Error saving API keys: $e");
       }
-      throw Exception('Failed to save API keys');
+      throw Exception("Failed to save API keys");
     }
   }
 
@@ -448,7 +445,7 @@ class ApiKeyService {
   }) async {
     final apiKeys = await getApiKeys();
     final newKey = ApiKey(
-      id: '${DateTime.now().millisecondsSinceEpoch}_${Random().nextInt(1000)}',
+      id: "${DateTime.now().millisecondsSinceEpoch}_${Random().nextInt(1000)}",
       key: customKey ?? generateApiKey(),
       name: name,
       createdAt: DateTime.now(),

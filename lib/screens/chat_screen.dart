@@ -1,4 +1,4 @@
-import 'package:shadcn_flutter/shadcn_flutter.dart';
+import "package:shadcn_flutter/shadcn_flutter.dart";
 
 class ChatScreen extends StatefulWidget {
   const ChatScreen({super.key});
@@ -22,7 +22,7 @@ class ChatScreenState extends State<ChatScreen> {
                 Avatar(
                   initials: Avatar.getInitials("john Doe"),
                   provider: const NetworkImage(
-                    'https://avatars.githubusercontent.com/u/64018564?v=4',
+                    "https://avatars.githubusercontent.com/u/64018564?v=4",
                   ),
                 ),
                 Wrap(

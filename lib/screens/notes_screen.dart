@@ -1,8 +1,5 @@
-import 'dart:convert';
-import 'package:shadcn_flutter/shadcn_flutter.dart';
-
-// TODO:
-// Overflow issue
+import "dart:convert";
+import "package:shadcn_flutter/shadcn_flutter.dart";
 
 class NotesScreen extends StatefulWidget {
   const NotesScreen({super.key});
@@ -50,7 +47,7 @@ class NotesScreenState extends State<NotesScreen> {
     }
 
     // Category filter
-    if (_selectedCategory != null && _selectedCategory != 'AllCategories') {
+    if (_selectedCategory != null && _selectedCategory != "AllCategories") {
       filtered = filtered
           .where((note) => note.category == _selectedCategory)
           .toList();
@@ -59,13 +56,13 @@ class NotesScreenState extends State<NotesScreen> {
     // Sorting
     filtered.sort((a, b) {
       switch (_selectedSort) {
-        case 'RecentlyUpdated':
+        case "RecentlyUpdated":
           return b.updatedAt.compareTo(a.updatedAt);
-        case 'RecentlyCreated':
+        case "RecentlyCreated":
           return b.createdAt.compareTo(a.createdAt);
-        case 'Title(A-Z)':
+        case "Title(A-Z)":
           return a.title.compareTo(b.title);
-        case 'Category':
+        case "Category":
           return a.category.compareTo(b.category);
         default:
           return b.updatedAt.compareTo(a.updatedAt);
@@ -88,7 +85,7 @@ class NotesScreenState extends State<NotesScreen> {
     // Create controllers for each field
     final titleController = TextEditingController(text: note.title);
     final contentController = TextEditingController(text: note.content);
-    final tagsController = TextEditingController(text: note.tags.join(', '));
+    final tagsController = TextEditingController(text: note.tags.join(", "));
 
     showDialog(
       context: context,
@@ -195,17 +192,17 @@ class NotesScreenState extends State<NotesScreen> {
                 final tagsText = tagsController.text.trim();
 
                 if (title.isEmpty) {
-                  _showSnackBar('Title is required');
+                  _showSnackBar("Title is required");
                   return;
                 }
 
                 if (content.isEmpty) {
-                  _showSnackBar('Content is required');
+                  _showSnackBar("Content is required");
                   return;
                 }
 
                 final tags = tagsText
-                    .split(',')
+                    .split(",")
                     .map((tag) => tag.trim())
                     .where((tag) => tag.isNotEmpty)
                     .toList();
@@ -226,7 +223,7 @@ class NotesScreenState extends State<NotesScreen> {
                 });
 
                 Navigator.of(context).pop();
-                _showSnackBar('Note updated successfully');
+                _showSnackBar("Note updated successfully");
               },
               child: const Text("Update Note"),
             ),
@@ -330,7 +327,7 @@ class NotesScreenState extends State<NotesScreen> {
               onPressed: () {
                 final name = categoryNameController.text.trim();
                 if (name.isEmpty) {
-                  _showSnackBar('Category name is required');
+                  _showSnackBar("Category name is required");
                   return;
                 }
 
@@ -338,7 +335,7 @@ class NotesScreenState extends State<NotesScreen> {
                 if (_categories.any(
                   (c) => c.name.toLowerCase() == name.toLowerCase(),
                 )) {
-                  _showSnackBar('Category already exists');
+                  _showSnackBar("Category already exists");
                   return;
                 }
 
@@ -353,7 +350,7 @@ class NotesScreenState extends State<NotesScreen> {
                 });
 
                 Navigator.of(context).pop();
-                _showSnackBar('Category created successfully');
+                _showSnackBar("Category created successfully");
               },
               child: const Text("Create Category"),
             ),
@@ -383,7 +380,7 @@ class NotesScreenState extends State<NotesScreen> {
                   _notes.removeWhere((n) => n.id == note.id);
                 });
                 Navigator.of(context).pop();
-                _showSnackBar('Note deleted successfully');
+                _showSnackBar("Note deleted successfully");
               },
               child: const Text("Delete"),
             ),
@@ -409,58 +406,58 @@ class NotesScreenState extends State<NotesScreen> {
     );
 
     if (notesUsingCategory) {
-      _showSnackBar('Cannot delete category: Notes are using it');
+      _showSnackBar("Cannot delete category: Notes are using it");
       return;
     }
 
     setState(() {
       _categories.removeWhere((c) => c.id == category.id);
     });
-    _showSnackBar('Category deleted successfully');
+    _showSnackBar("Category deleted successfully");
   }
 
   void _exportNotes(String format) {
     if (_notes.isEmpty) {
-      _showSnackBar('No notes to export');
+      _showSnackBar("No notes to export");
       return;
     }
 
     String exportData;
-    if (format == 'json') {
+    if (format == "json") {
       final notesJson = _notes.map((note) {
         return {
-          'id': note.id,
-          'title': note.title,
-          'content': note.content,
-          'category': note.category,
-          'tags': note.tags,
-          'createdAt': note.createdAt.toIso8601String(),
-          'updatedAt': note.updatedAt.toIso8601String(),
-          'isPinned': note.isPinned,
+          "id": note.id,
+          "title": note.title,
+          "content": note.content,
+          "category": note.category,
+          "tags": note.tags,
+          "createdAt": note.createdAt.toIso8601String(),
+          "updatedAt": note.updatedAt.toIso8601String(),
+          "isPinned": note.isPinned,
         };
       }).toList();
-      exportData = const JsonEncoder.withIndent('  ').convert(notesJson);
+      exportData = const JsonEncoder.withIndent("  ").convert(notesJson);
     } else {
       exportData = _notes
           .map((note) {
-            return '''
+            return """
  Title: ${note.title}
  Category: ${note.category}
- Tags: ${note.tags.join(', ')}
+ Tags: ${note.tags.join(", ")}
  Created: ${_formatDate(note.createdAt)}
  Updated: ${_formatDate(note.updatedAt)}
- Pinned: ${note.isPinned ? 'Yes' : 'No'}
+ Pinned: ${note.isPinned ? "Yes" : "No"}
 
  ${note.content}
 
- ${'-' * 40}
- ''';
+ ${"-" * 40}
+ """;
           })
-          .join('\n');
+          .join("\n");
     }
 
     // In a real app, you would save this to a file
-    // For now, we'll just show it in a dialog
+    // For now, we"ll just show it in a dialog
     showDialog(
       context: context,
       builder: (context) {
@@ -487,7 +484,7 @@ class NotesScreenState extends State<NotesScreen> {
       },
     );
 
-    _showSnackBar('Notes exported successfully');
+    _showSnackBar("Notes exported successfully");
   }
 
   void _showSnackBar(String message) {
@@ -505,15 +502,15 @@ class NotesScreenState extends State<NotesScreen> {
 
     if (difference.inDays == 0) {
       if (difference.inHours == 0) {
-        return '${difference.inMinutes}m ago';
+        return "${difference.inMinutes}m ago";
       }
-      return '${difference.inHours}h ago';
+      return "${difference.inHours}h ago";
     } else if (difference.inDays == 1) {
-      return 'Yesterday';
+      return "Yesterday";
     } else if (difference.inDays < 7) {
-      return '${difference.inDays}d ago';
+      return "${difference.inDays}d ago";
     } else {
-      return '${date.month}/${date.day}/${date.year}';
+      return "${date.month}/${date.day}/${date.year}";
     }
   }
 
@@ -582,14 +579,14 @@ class NotesScreenState extends State<NotesScreen> {
                           children: [
                             MenuButton(
                               onPressed: (_) {
-                                _exportNotes('json');
+                                _exportNotes("json");
                                 Navigator.of(context).pop();
                               },
                               child: const Text("Export as JSON"),
                             ),
                             MenuButton(
                               onPressed: (_) {
-                                _exportNotes('text');
+                                _exportNotes("text");
                                 Navigator.of(context).pop();
                               },
                               child: const Text("Export as Text"),
@@ -813,7 +810,7 @@ class NotesScreenState extends State<NotesScreen> {
                       return Chip(child: Text(tag));
                     }),
                     if (note.tags.length > 2)
-                      Chip(child: Text('+${note.tags.length - 2}')),
+                      Chip(child: Text("+${note.tags.length - 2}")),
                   ],
                 ),
                 Text(
@@ -965,17 +962,17 @@ class NotesScreenState extends State<NotesScreen> {
                 final tagsText = tagsController.text.trim();
 
                 if (title.isEmpty) {
-                  _showSnackBar('Title is required');
+                  _showSnackBar("Title is required");
                   return;
                 }
 
                 if (content.isEmpty) {
-                  _showSnackBar('Content is required');
+                  _showSnackBar("Content is required");
                   return;
                 }
 
                 final tags = tagsText
-                    .split(',')
+                    .split(",")
                     .map((tag) => tag.trim())
                     .where((tag) => tag.isNotEmpty)
                     .toList();
@@ -993,7 +990,7 @@ class NotesScreenState extends State<NotesScreen> {
                 });
 
                 Navigator.of(context).pop();
-                _showSnackBar('Note created successfully');
+                _showSnackBar("Note created successfully");
               },
               child: const Text("Create Note"),
             ),

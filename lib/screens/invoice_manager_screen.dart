@@ -1,7 +1,4 @@
-import 'package:shadcn_flutter/shadcn_flutter.dart';
-
-// TODO:
-// Invoice table does not really work on mobile
+import "package:shadcn_flutter/shadcn_flutter.dart";
 
 class InvoiceManagerScreen extends StatefulWidget {
   const InvoiceManagerScreen({super.key});
@@ -25,15 +22,15 @@ class InvoiceManagerScreenState extends State<InvoiceManagerScreen> {
   final TextEditingController _clientAddressController =
       TextEditingController();
   final TextEditingController _descriptionController = TextEditingController();
-  final TextEditingController _qtyController = TextEditingController(text: '1');
+  final TextEditingController _qtyController = TextEditingController(text: "1");
   final TextEditingController _unitPriceController = TextEditingController(
-    text: '0.00',
+    text: "0.00",
   );
   final TextEditingController _taxRateController = TextEditingController(
-    text: '0',
+    text: "0",
   );
   final TextEditingController _notesController = TextEditingController(
-    text: 'Payment terms, additional information, etc',
+    text: "Payment terms, additional information, etc",
   );
 
   List<InvoiceItem> _lineItems = [];
@@ -52,7 +49,7 @@ class InvoiceManagerScreenState extends State<InvoiceManagerScreen> {
     // Load sample data
     _invoices.addAll([
       Invoice(
-        number: 'INV-20250312',
+        number: "INV-20250312",
         date: DateTime(2025, 3, 12),
         dueDate: DateTime(2025, 3, 31),
         items: 1,
@@ -60,7 +57,7 @@ class InvoiceManagerScreenState extends State<InvoiceManagerScreen> {
         amount: 400.0,
       ),
       Invoice(
-        number: 'INV-20250310',
+        number: "INV-20250310",
         date: DateTime(2025, 3, 10),
         dueDate: DateTime(2025, 3, 25),
         items: 3,
@@ -68,7 +65,7 @@ class InvoiceManagerScreenState extends State<InvoiceManagerScreen> {
         amount: 1250.0,
       ),
       Invoice(
-        number: 'INV-20250305',
+        number: "INV-20250305",
         date: DateTime(2025, 3, 5),
         dueDate: DateTime(2025, 3, 20),
         items: 2,
@@ -83,8 +80,8 @@ class InvoiceManagerScreenState extends State<InvoiceManagerScreen> {
     _invoiceDate = now;
     _invoiceDueDate = now.add(const Duration(days: 30));
     _invoiceNumberController.text =
-        'INV-${now.year}${now.month.toString().padLeft(2, '0')}${now.day.toString().padLeft(2, '0')}';
-    _selectedValue = 'Draft';
+        "INV-${now.year}${now.month.toString().padLeft(2, "0")}${now.day.toString().padLeft(2, "0")}";
+    _selectedValue = "Draft";
     _recalculateTotals();
   }
 
@@ -115,7 +112,7 @@ class InvoiceManagerScreenState extends State<InvoiceManagerScreen> {
         context: context,
         builder: (context, overlay) {
           return SurfaceCard(
-            child: Basic(title: const Text('Please fill all required fields')),
+            child: Basic(title: const Text("Please fill all required fields")),
           );
         },
       );
@@ -132,9 +129,9 @@ class InvoiceManagerScreenState extends State<InvoiceManagerScreen> {
     setState(() {
       _lineItems.add(newItem);
       _descriptionController.clear();
-      _qtyController.text = '1';
-      _unitPriceController.text = '0.00';
-      _taxRateController.text = '0';
+      _qtyController.text = "1";
+      _unitPriceController.text = "0.00";
+      _taxRateController.text = "0";
     });
 
     _recalculateTotals();
@@ -153,7 +150,7 @@ class InvoiceManagerScreenState extends State<InvoiceManagerScreen> {
         context: context,
         builder: (context, overlay) {
           return SurfaceCard(
-            child: Basic(title: const Text('Client name is required')),
+            child: Basic(title: const Text("Client name is required")),
           );
         },
       );
@@ -165,7 +162,7 @@ class InvoiceManagerScreenState extends State<InvoiceManagerScreen> {
         context: context,
         builder: (context, overlay) {
           return SurfaceCard(
-            child: Basic(title: const Text('Add at least one line item')),
+            child: Basic(title: const Text("Add at least one line item")),
           );
         },
       );
@@ -178,7 +175,7 @@ class InvoiceManagerScreenState extends State<InvoiceManagerScreen> {
       dueDate: _invoiceDueDate!,
       items: _lineItems.length,
       status: InvoiceStatus.values.firstWhere(
-        (status) => status.toString().split('.').last == _selectedValue,
+        (status) => status.toString().split(".").last == _selectedValue,
         orElse: () => InvoiceStatus.draft,
       ),
       amount: _total,
@@ -199,7 +196,7 @@ class InvoiceManagerScreenState extends State<InvoiceManagerScreen> {
       context: context,
       builder: (context, overlay) {
         return SurfaceCard(
-          child: Basic(title: const Text('Invoice saved successfully')),
+          child: Basic(title: const Text("Invoice saved successfully")),
         );
       },
     );
@@ -210,7 +207,7 @@ class InvoiceManagerScreenState extends State<InvoiceManagerScreen> {
     _clientNameController.clear();
     _clientEmailController.clear();
     _clientAddressController.clear();
-    _notesController.text = 'Payment terms, additional information, etc';
+    _notesController.text = "Payment terms, additional information, etc";
     _initializeNewInvoice();
   }
 
@@ -219,17 +216,17 @@ class InvoiceManagerScreenState extends State<InvoiceManagerScreen> {
     showDialog(
       context: context,
       builder: (context) => AlertDialog(
-        title: Text('Invoice ${invoice.number}'),
+        title: Text("Invoice ${invoice.number}"),
         content: Column(
           crossAxisAlignment: .start,
           mainAxisSize: MainAxisSize.min,
           children: [
-            Text('Client: ${invoice.clientName}'),
-            Text('Amount: \$${invoice.amount.toStringAsFixed(2)}'),
-            Text('Status: ${invoice.status.toString().split('.').last}'),
+            Text("Client: ${invoice.clientName}"),
+            Text("Amount: \$${invoice.amount.toStringAsFixed(2)}"),
+            Text("Status: ${invoice.status.toString().split(".").last}"),
             const SizedBox(height: 16),
             if (invoice.notes.isNotEmpty) ...[
-              const Text('Notes:', style: TextStyle(fontWeight: .bold)),
+              const Text("Notes:", style: TextStyle(fontWeight: .bold)),
               Text(invoice.notes),
             ],
           ],
@@ -237,7 +234,7 @@ class InvoiceManagerScreenState extends State<InvoiceManagerScreen> {
         actions: [
           Button.outline(
             onPressed: () => Navigator.pop(context),
-            child: const Text('Close'),
+            child: const Text("Close"),
           ),
         ],
       ),
@@ -248,7 +245,7 @@ class InvoiceManagerScreenState extends State<InvoiceManagerScreen> {
     setState(() {
       creating = true;
       _invoiceNumberController.text = invoice.number;
-      _selectedValue = invoice.status.toString().split('.').last;
+      _selectedValue = invoice.status.toString().split(".").last;
       _invoiceDate = invoice.date;
       _invoiceDueDate = invoice.dueDate;
       _clientNameController.text = invoice.clientName;
@@ -259,7 +256,7 @@ class InvoiceManagerScreenState extends State<InvoiceManagerScreen> {
       _recalculateTotals();
     });
 
-    // Remove the invoice from list since we're editing it
+    // Remove the invoice from list since we"re editing it
     _invoices.remove(invoice);
   }
 
@@ -267,14 +264,14 @@ class InvoiceManagerScreenState extends State<InvoiceManagerScreen> {
     showDialog(
       context: context,
       builder: (context) => AlertDialog(
-        title: const Text('Delete Invoice'),
+        title: const Text("Delete Invoice"),
         content: Text(
-          'Are you sure you want to delete invoice ${invoice.number}?',
+          "Are you sure you want to delete invoice ${invoice.number}?",
         ),
         actions: [
           Button.outline(
             onPressed: () => Navigator.pop(context),
-            child: const Text('Cancel'),
+            child: const Text("Cancel"),
           ),
           Button.destructive(
             onPressed: () {
@@ -286,12 +283,12 @@ class InvoiceManagerScreenState extends State<InvoiceManagerScreen> {
                 context: context,
                 builder: (context, overlay) {
                   return SurfaceCard(
-                    child: Basic(title: const Text('Invoice deleted')),
+                    child: Basic(title: const Text("Invoice deleted")),
                   );
                 },
               );
             },
-            child: const Text('Delete'),
+            child: const Text("Delete"),
           ),
         ],
       ),
@@ -407,12 +404,12 @@ class InvoiceManagerScreenState extends State<InvoiceManagerScreen> {
                         padding: const .all(8),
                         child: PrimaryBadge(
                           child: Text(
-                            invoice.status.toString().split('.').last,
+                            invoice.status.toString().split(".").last,
                           ),
                         ),
                       ),
                     ),
-                    _buildCell('\$${invoice.amount.toStringAsFixed(2)}', true),
+                    _buildCell("\$${invoice.amount.toStringAsFixed(2)}", true),
                     TableCell(
                       child: Container(
                         padding: const .only(left: 8, right: 0),
@@ -455,10 +452,10 @@ class InvoiceManagerScreenState extends State<InvoiceManagerScreen> {
                     color: Colors.gray.shade400,
                   ),
                   const SizedBox(height: 16),
-                  Text('No invoices yet').muted(),
+                  Text("No invoices yet").muted(),
                   const SizedBox(height: 8),
                   Text(
-                    'Click "New Invoice" to create your first invoice',
+                    "Click 'New Invoice' to create your first invoice",
                   ).small().muted(),
                 ],
               ),
@@ -735,9 +732,9 @@ class InvoiceManagerScreenState extends State<InvoiceManagerScreen> {
                 IconButton.outline(
                   onPressed: () {
                     _descriptionController.clear();
-                    _qtyController.text = '1';
-                    _unitPriceController.text = '0.00';
-                    _taxRateController.text = '0';
+                    _qtyController.text = "1";
+                    _unitPriceController.text = "0.00";
+                    _taxRateController.text = "0";
                   },
                   density: .icon,
                   icon: const Icon(LucideIcons.x),
@@ -831,15 +828,15 @@ class InvoiceManagerScreenState extends State<InvoiceManagerScreen> {
           const SizedBox(width: 16),
           SizedBox(
             width: 140,
-            child: Text('\$${item.unitPrice.toStringAsFixed(2)}'),
+            child: Text("\$${item.unitPrice.toStringAsFixed(2)}"),
           ),
           const SizedBox(width: 16),
           SizedBox(
             width: 120,
-            child: Text('${item.taxRate.toStringAsFixed(1)}%'),
+            child: Text("${item.taxRate.toStringAsFixed(1)}%"),
           ),
           const SizedBox(width: 16),
-          SizedBox(width: 140, child: Text('\$${total.toStringAsFixed(2)}')),
+          SizedBox(width: 140, child: Text("\$${total.toStringAsFixed(2)}")),
           const SizedBox(width: 16),
           IconButton.outline(
             onPressed: () => _removeLineItem(index),
@@ -860,7 +857,7 @@ class InvoiceManagerScreenState extends State<InvoiceManagerScreen> {
   }
 
   String _formatDate(DateTime date) {
-    return '${date.day.toString().padLeft(2, '0')}/${date.month.toString().padLeft(2, '0')}/${date.year}';
+    return "${date.day.toString().padLeft(2, "0")}/${date.month.toString().padLeft(2, "0")}/${date.year}";
   }
 
   @override
@@ -901,11 +898,11 @@ class Invoice {
     required this.items,
     required this.status,
     required this.amount,
-    this.clientName = '',
-    this.clientEmail = '',
-    this.clientAddress = '',
+    this.clientName = "",
+    this.clientEmail = "",
+    this.clientAddress = "",
     this.lineItems = const [],
-    this.notes = '',
+    this.notes = "",
   });
 }
 

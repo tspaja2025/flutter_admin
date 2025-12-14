@@ -1,8 +1,5 @@
 import "package:shadcn_flutter/shadcn_flutter.dart";
 
-// TODO:
-// Overflow issue
-
 class ToDoScreen extends StatefulWidget {
   const ToDoScreen({super.key});
 

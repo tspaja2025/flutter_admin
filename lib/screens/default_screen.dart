@@ -1,15 +1,15 @@
-import 'package:flutter_admin/screens/api_keys_screen.dart';
-import 'package:flutter_admin/screens/calendar_screen.dart';
-import 'package:flutter_admin/screens/chat_screen.dart';
-import 'package:flutter_admin/screens/file_manager_screen.dart';
-import 'package:flutter_admin/screens/home_screen.dart';
-import 'package:flutter_admin/screens/invoice_manager_screen.dart';
-import 'package:flutter_admin/screens/kanban_board_screen.dart';
-import 'package:flutter_admin/screens/mail_screen.dart';
-import 'package:flutter_admin/screens/notes_screen.dart';
-import 'package:flutter_admin/screens/qr_generator_screen.dart';
-import 'package:flutter_admin/screens/todo_screen.dart';
-import 'package:shadcn_flutter/shadcn_flutter.dart';
+import "package:flutter_admin/screens/api_keys_screen.dart";
+import "package:flutter_admin/screens/calendar_screen.dart";
+import "package:flutter_admin/screens/chat_screen.dart";
+import "package:flutter_admin/screens/file_manager_screen.dart";
+import "package:flutter_admin/screens/home_screen.dart";
+import "package:flutter_admin/screens/invoice_manager_screen.dart";
+import "package:flutter_admin/screens/kanban_board_screen.dart";
+import "package:flutter_admin/screens/mail_screen.dart";
+import "package:flutter_admin/screens/notes_screen.dart";
+import "package:flutter_admin/screens/qr_generator_screen.dart";
+import "package:flutter_admin/screens/todo_screen.dart";
+import "package:shadcn_flutter/shadcn_flutter.dart";
 
 class DefaultScreen extends StatefulWidget {
   const DefaultScreen({super.key});

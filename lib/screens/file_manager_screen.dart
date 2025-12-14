@@ -1,7 +1,4 @@
-import 'package:shadcn_flutter/shadcn_flutter.dart';
-
-// TODO:
-// Overflow issue
+import "package:shadcn_flutter/shadcn_flutter.dart";
 
 class FileManagerScreen extends StatefulWidget {
   const FileManagerScreen({super.key});
@@ -72,50 +69,50 @@ class FileManagerScreenState extends State<FileManagerScreen> {
     if (path.isEmpty) {
       files = [
         FileItem(
-          name: 'Documents',
-          path: 'Documents',
+          name: "Documents",
+          path: "Documents",
           isDirectory: true,
           size: 0,
           modifiedDate: DateTime(2024, 1, 15),
         ),
         FileItem(
-          name: 'Images',
-          path: 'Images',
+          name: "Images",
+          path: "Images",
           isDirectory: true,
           size: 0,
           modifiedDate: DateTime(2024, 1, 14),
         ),
         FileItem(
-          name: 'Projects',
-          path: 'Projects',
+          name: "Projects",
+          path: "Projects",
           isDirectory: true,
           size: 0,
           modifiedDate: DateTime(2024, 1, 16),
         ),
         FileItem(
-          name: 'report.pdf',
-          path: 'report.pdf',
+          name: "report.pdf",
+          path: "report.pdf",
           isDirectory: false,
           size: 1024 * 1024, // 1MB
           modifiedDate: DateTime(2024, 1, 13),
         ),
         FileItem(
-          name: 'notes.txt',
-          path: 'notes.txt',
+          name: "notes.txt",
+          path: "notes.txt",
           isDirectory: false,
           size: 512,
           modifiedDate: DateTime(2024, 1, 12),
         ),
         FileItem(
-          name: 'budget.xlsx',
-          path: 'budget.xlsx',
+          name: "budget.xlsx",
+          path: "budget.xlsx",
           isDirectory: false,
           size: 2048 * 1024, // 2MB
           modifiedDate: DateTime(2024, 1, 10),
         ),
         FileItem(
-          name: 'presentation.pptx',
-          path: 'presentation.pptx',
+          name: "presentation.pptx",
+          path: "presentation.pptx",
           isDirectory: false,
           size: 3 * 1024 * 1024, // 3MB
           modifiedDate: DateTime(2024, 1, 9),
@@ -124,22 +121,22 @@ class FileManagerScreenState extends State<FileManagerScreen> {
     } else if (path == "Documents") {
       files = [
         FileItem(
-          name: 'Work',
-          path: 'Documents/Work',
+          name: "Work",
+          path: "Documents/Work",
           isDirectory: true,
           size: 0,
           modifiedDate: DateTime(2024, 1, 14),
         ),
         FileItem(
-          name: 'Personal',
-          path: 'Documents/Personal',
+          name: "Personal",
+          path: "Documents/Personal",
           isDirectory: true,
           size: 0,
           modifiedDate: DateTime(2024, 1, 13),
         ),
         FileItem(
-          name: 'resume.pdf',
-          path: 'Documents/resume.pdf',
+          name: "resume.pdf",
+          path: "Documents/resume.pdf",
           isDirectory: false,
           size: 512 * 1024, // 512KB
           modifiedDate: DateTime(2024, 1, 12),
@@ -148,22 +145,22 @@ class FileManagerScreenState extends State<FileManagerScreen> {
     } else if (path == "Images") {
       files = [
         FileItem(
-          name: 'Vacation 2023',
-          path: 'Images/Vacation 2023',
+          name: "Vacation 2023",
+          path: "Images/Vacation 2023",
           isDirectory: true,
           size: 0,
           modifiedDate: DateTime(2023, 12, 20),
         ),
         FileItem(
-          name: 'Family',
-          path: 'Images/Family',
+          name: "Family",
+          path: "Images/Family",
           isDirectory: true,
           size: 0,
           modifiedDate: DateTime(2023, 12, 15),
         ),
         FileItem(
-          name: 'beach.jpg',
-          path: 'Images/beach.jpg',
+          name: "beach.jpg",
+          path: "Images/beach.jpg",
           isDirectory: false,
           size: 2 * 1024 * 1024, // 2MB
           modifiedDate: DateTime(2023, 12, 10),
@@ -211,8 +208,8 @@ class FileManagerScreenState extends State<FileManagerScreen> {
           if (!a.isDirectory && b.isDirectory) return 1;
 
           // Both are files, sort by extension
-          final aExt = a.name.split('.').last.toLowerCase();
-          final bExt = b.name.split('.').last.toLowerCase();
+          final aExt = a.name.split(".").last.toLowerCase();
+          final bExt = b.name.split(".").last.toLowerCase();
           return aExt.compareTo(bExt);
         });
         break;
@@ -315,7 +312,7 @@ class FileManagerScreenState extends State<FileManagerScreen> {
           _files.add(
             FileItem(
               name: result,
-              path: '$_currentPath${_currentPath.isNotEmpty ? '/' : ''}$result',
+              path: "$_currentPath${_currentPath.isNotEmpty ? "/" : ""}$result",
               isDirectory: true,
               size: 0,
               modifiedDate: DateTime.now(),
@@ -443,7 +440,7 @@ class FileManagerScreenState extends State<FileManagerScreen> {
     } else if (difference.inDays < 7) {
       return "${difference.inDays} days ago";
     } else {
-      return "${date.year}-${date.month.toString().padLeft(2, '0')}-${date.day.toString().padLeft(2, '0')}";
+      return "${date.year}-${date.month.toString().padLeft(2, "0")}-${date.day.toString().padLeft(2, "0")}";
     }
   }
 
@@ -452,22 +449,22 @@ class FileManagerScreenState extends State<FileManagerScreen> {
       return const Icon(LucideIcons.folder, size: 48, color: Colors.blue);
     }
 
-    final ext = file.name.split('.').last.toLowerCase();
+    final ext = file.name.split(".").last.toLowerCase();
     switch (ext) {
-      case 'pdf':
+      case "pdf":
         return const Icon(LucideIcons.fileText, size: 48, color: Colors.red);
-      case 'txt':
+      case "txt":
         return const Icon(LucideIcons.fileText, size: 48, color: Colors.gray);
-      case 'jpg':
-      case 'jpeg':
-      case 'png':
-      case 'gif':
+      case "jpg":
+      case "jpeg":
+      case "png":
+      case "gif":
         return const Icon(LucideIcons.image, size: 48, color: Colors.green);
-      case 'xlsx':
-      case 'xls':
+      case "xlsx":
+      case "xls":
         return const Icon(LucideIcons.table, size: 48, color: Colors.green);
-      case 'pptx':
-      case 'ppt':
+      case "pptx":
+      case "ppt":
         return const Icon(
           LucideIcons.presentation,
           size: 48,
@@ -607,7 +604,7 @@ class FileManagerScreenState extends State<FileManagerScreen> {
                   child: Text(
                     file.isDirectory
                         ? "Folder"
-                        : file.name.split('.').last.toUpperCase(),
+                        : file.name.split(".").last.toUpperCase(),
                   ),
                 ),
               ),

@@ -1,8 +1,5 @@
-import 'package:qr_flutter/qr_flutter.dart';
-import 'package:shadcn_flutter/shadcn_flutter.dart';
-
-// TODO:
-// Overflow issue
+import "package:qr_flutter/qr_flutter.dart";
+import "package:shadcn_flutter/shadcn_flutter.dart";
 
 class QrGeneratorScreen extends StatefulWidget {
   const QrGeneratorScreen({super.key});
@@ -159,7 +156,7 @@ class QrGeneratorScreenState extends State<QrGeneratorScreen> {
                 borderRadius: .circular(12),
               ),
               child: QrImageView(
-                data: '1234567890',
+                data: "1234567890",
                 version: QrVersions.auto,
                 size: 200.0,
               ),
@@ -190,20 +187,20 @@ class QrGeneratorScreenState extends State<QrGeneratorScreen> {
 }
 
 // Old to be removed
-// import 'dart:js_interop';
-// import 'dart:async';
-// import 'dart:ui' as ui;
-// import 'dart:io';
-// import 'package:web/web.dart' as web;
-// import 'package:flutter/services.dart';
-// import 'package:file_picker/file_picker.dart';
-// import 'package:qr_flutter/qr_flutter.dart';
-// import 'package:flutter_svg/flutter_svg.dart';
-// import 'package:flutter/foundation.dart';
-// import 'package:flutter/rendering.dart';
-// import 'package:path_provider/path_provider.dart';
-// import 'package:share_plus/share_plus.dart';
-// import 'package:shadcn_flutter/shadcn_flutter.dart';
+// import "dart:js_interop";
+// import "dart:async";
+// import "dart:ui" as ui;
+// import "dart:io";
+// import "package:web/web.dart" as web;
+// import "package:flutter/services.dart";
+// import "package:file_picker/file_picker.dart";
+// import "package:qr_flutter/qr_flutter.dart";
+// import "package:flutter_svg/flutter_svg.dart";
+// import "package:flutter/foundation.dart";
+// import "package:flutter/rendering.dart";
+// import "package:path_provider/path_provider.dart";
+// import "package:share_plus/share_plus.dart";
+// import "package:shadcn_flutter/shadcn_flutter.dart";
 
 // class QrGeneratorScreen extends StatefulWidget {
 //   const QrGeneratorScreen({super.key});
@@ -286,7 +283,7 @@ class QrGeneratorScreenState extends State<QrGeneratorScreen> {
 //     try {
 //       final result = await FilePicker.platform.pickFiles(
 //         type: FileType.custom,
-//         allowedExtensions: ['png', 'jpg', 'jpeg', 'svg'],
+//         allowedExtensions: ["png", "jpg", "jpeg", "svg"],
 //         withData: true,
 //       );
 
@@ -308,7 +305,7 @@ class QrGeneratorScreenState extends State<QrGeneratorScreen> {
 //     final anchor = web.HTMLAnchorElement()
 //       ..href = url
 //       ..download = filename
-//       ..style.display = 'none';
+//       ..style.display = "none";
 //     web.document.body?.append(anchor);
 //     anchor.click();
 //     anchor.remove();
@@ -749,7 +746,7 @@ class QrGeneratorScreenState extends State<QrGeneratorScreen> {
 //           actions: [
 //             TextButton(
 //               onPressed: () => Navigator.pop(context),
-//               child: const Text('OK'),
+//               child: const Text("OK"),
 //             ),
 //           ],
 //         );
@@ -789,7 +786,7 @@ class QrGeneratorScreenState extends State<QrGeneratorScreen> {
 //   }
 
 //   static bool isValidPhoneNumber(String phone) {
-//     final regex = RegExp(r'^\+?[\d\s\-\(\)]{10,}$');
+//     final regex = RegExp(r"^\+?[\d\s\-\(\)]{10,}$");
 //     return regex.hasMatch(phone);
 //   }
 
@@ -835,40 +832,40 @@ class QrGeneratorScreenState extends State<QrGeneratorScreen> {
 
 //       String colorToHex(Color color) {
 //         final rgb = color.toARGB32();
-//         final hex = rgb.toRadixString(16).padLeft(8, '0').substring(2);
+//         final hex = rgb.toRadixString(16).padLeft(8, "0").substring(2);
 //         return hex;
 //       }
 
 //       // SVG header
 //       buffer.writeln(
-//         '<svg xmlns="http://www.w3.org/2000/svg" '
-//         'xmlns:xlink="http://www.w3.org/1999/xlink" '
-//         'width="${moduleCount * scale}" height="${moduleCount * scale}" '
-//         'viewBox="0 0 $moduleCount $moduleCount">',
+//         "<svg xmlns="http://www.w3.org/2000/svg" "
+//         "xmlns:xlink="http://www.w3.org/1999/xlink" "
+//         "width="${moduleCount * scale}" height="${moduleCount * scale}" "
+//         "viewBox="0 0 $moduleCount $moduleCount">",
 //       );
 
 //       // Background
 //       buffer.writeln(
-//         '<rect width="100%" height="100%" fill="#${colorToHex(backgroundColor)}"/>',
+//         "<rect width="100%" height="100%" fill="#${colorToHex(backgroundColor)}"/>",
 //       );
 
 //       // QR code path
-//       buffer.write('<path fill="#${colorToHex(foregroundColor)}" d="');
+//       buffer.write("<path fill="#${colorToHex(foregroundColor)}" d="");
 //       for (int y = 0; y < moduleCount; y++) {
 //         for (int x = 0; x < moduleCount; x++) {
 //           if (qrImage.isDark(y, x)) {
-//             buffer.write('M$x,$y h1v1h-1z ');
+//             buffer.write("M$x,$y h1v1h-1z ");
 //           }
 //         }
 //       }
-//       buffer.writeln('"/>');
+//       buffer.writeln(""/>");
 
 //       // SVG logo
 //       if (svgLogoString != null) {
 //         _addSvgLogo(buffer, svgLogoString, moduleCount);
 //       }
 
-//       buffer.writeln('</svg>');
+//       buffer.writeln("</svg>");
 //       return buffer.toString();
 //     } catch (e) {
 //       throw Exception("Failed to generate SVG: $e");
@@ -890,40 +887,40 @@ class QrGeneratorScreenState extends State<QrGeneratorScreen> {
 
 //     // Extract inner SVG content
 //     final innerSvg = svgLogoString
-//         .replaceAll(RegExp(r'<\?xml.*?\?>'), '')
-//         .replaceAll(RegExp(r'<!DOCTYPE.*?>'), '')
-//         .replaceAll(RegExp(r'<svg[^>]*>'), '')
-//         .replaceAll(RegExp(r'</svg>'), '');
+//         .replaceAll(RegExp(r"<\?xml.*?\?>"), "")
+//         .replaceAll(RegExp(r"<!DOCTYPE.*?>"), "")
+//         .replaceAll(RegExp(r"<svg[^>]*>"), "")
+//         .replaceAll(RegExp(r"</svg>"), "");
 
 //     buffer.writeln(
-//       '<g transform="translate($offset,$offset) scale($scaleX,$scaleY)">',
+//       "<g transform="translate($offset,$offset) scale($scaleX,$scaleY)">",
 //     );
 //     buffer.writeln(innerSvg);
-//     buffer.writeln('</g>');
+//     buffer.writeln("</g>");
 //   }
 
 //   static ui.Size _parseSvgDimensions(String svgString) {
 //     try {
 //       // Try to parse viewBox first
 //       final viewBoxMatch = RegExp(
-//         r'viewBox="[\s]*([\d\.-]+)[\s]+([\d\.-]+)[\s]+([\d\.-]+)[\s]+([\d\.-]+)"',
+//         r"viewBox="[\s]*([\d\.-]+)[\s]+([\d\.-]+)[\s]+([\d\.-]+)[\s]+([\d\.-]+)"",
 //       ).firstMatch(svgString);
 
 //       if (viewBoxMatch != null) {
-//         final width = double.tryParse(viewBoxMatch.group(3) ?? '');
-//         final height = double.tryParse(viewBoxMatch.group(4) ?? '');
+//         final width = double.tryParse(viewBoxMatch.group(3) ?? "");
+//         final height = double.tryParse(viewBoxMatch.group(4) ?? "");
 //         if (width != null && height != null) {
 //           return ui.Size(width, height);
 //         }
 //       }
 
 //       // Fallback to width/height attributes
-//       final widthMatch = RegExp(r'width="([^"]+)"').firstMatch(svgString);
-//       final heightMatch = RegExp(r'height="([^"]+)"').firstMatch(svgString);
+//       final widthMatch = RegExp(r"width="([^"]+)"").firstMatch(svgString);
+//       final heightMatch = RegExp(r"height="([^"]+)"").firstMatch(svgString);
 
 //       double parseSvgValue(String value) {
-//         if (value.endsWith('px')) {
-//           return double.tryParse(value.replaceAll('px', '')) ?? 100;
+//         if (value.endsWith("px")) {
+//           return double.tryParse(value.replaceAll("px", "")) ?? 100;
 //         }
 //         return double.tryParse(value) ?? 100;
 //       }
@@ -1011,7 +1008,7 @@ class QrGeneratorScreenState extends State<QrGeneratorScreen> {
 //   }
 
 //   Future<void> setLogoImage(PlatformFile pickedFile) async {
-//     if (pickedFile.extension == 'svg') {
+//     if (pickedFile.extension == "svg") {
 //       final svgString = String.fromCharCodes(pickedFile.bytes!);
 //       _svgLogoString = svgString;
 //       _logoImage = null;
@@ -1064,10 +1061,10 @@ class QrGeneratorScreenState extends State<QrGeneratorScreen> {
 //         downloadWebFile(pngBytes, "qr_code.png", "image/png");
 //       } else {
 //         final directory = await getApplicationDocumentsDirectory();
-//         final file = File('${directory.path}/qr_code.png');
+//         final file = File("${directory.path}/qr_code.png");
 //         await file.writeAsBytes(pngBytes);
 //         await SharePlus.instance.share(
-//           ShareParams(text: 'My QR Code', files: [XFile(file.path)]),
+//           ShareParams(text: "My QR Code", files: [XFile(file.path)]),
 //         );
 //       }
 //     } catch (e) {
@@ -1099,10 +1096,10 @@ class QrGeneratorScreenState extends State<QrGeneratorScreen> {
 //         downloadWebFile(bytes, "qr_code.svg", "image/svg+xml");
 //       } else {
 //         final directory = await getApplicationDocumentsDirectory();
-//         final file = File('${directory.path}/qr_code.svg');
+//         final file = File("${directory.path}/qr_code.svg");
 //         await file.writeAsBytes(bytes);
 //         await SharePlus.instance.share(
-//           ShareParams(text: 'My QR Code SVG', files: [XFile(file.path)]),
+//           ShareParams(text: "My QR Code SVG", files: [XFile(file.path)]),
 //         );
 //       }
 //     } catch (e) {

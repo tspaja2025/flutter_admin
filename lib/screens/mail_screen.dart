@@ -1,7 +1,4 @@
-import 'package:shadcn_flutter/shadcn_flutter.dart';
-
-// TODO:
-// Broken on mobile
+import "package:shadcn_flutter/shadcn_flutter.dart";
 
 class MailScreen extends StatefulWidget {
   const MailScreen({super.key});
@@ -245,7 +242,7 @@ class MailScreenState extends State<MailScreen> {
               Avatar(
                 initials: "Sarah Johnson",
                 provider: const NetworkImage(
-                  'https://avatars.githubusercontent.com/u/64018564?v=4',
+                  "https://avatars.githubusercontent.com/u/64018564?v=4",
                 ),
               ),
               Column(
