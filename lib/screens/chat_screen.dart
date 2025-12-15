@@ -8,13 +8,40 @@ class ChatScreen extends StatefulWidget {
 }
 
 class ChatScreenState extends State<ChatScreen> {
+  final TextEditingController _controller = TextEditingController();
+  final List<ChatMessage> _messages = [];
+
+  void _sendMessage() {
+    if (_controller.text.trim().isEmpty) return;
+
+    setState(() {
+      _messages.add(
+        ChatMessage(
+          text: _controller.text.trim(),
+          isMe: true,
+          timestamp: DateTime.now(),
+        ),
+      );
+
+      // Fake reply
+      _messages.add(
+        ChatMessage(
+          text: "This is a mock reply!",
+          isMe: false,
+          timestamp: DateTime.now(),
+        ),
+      );
+    });
+
+    _controller.clear();
+  }
+
   @override
   Widget build(BuildContext context) {
     return Scaffold(
       child: Padding(
         padding: const .all(16),
         child: Column(
-          mainAxisAlignment: .spaceBetween,
           children: [
             Row(
               mainAxisAlignment: .spaceBetween,
@@ -43,6 +70,15 @@ class ChatScreenState extends State<ChatScreen> {
                 ),
               ],
             ),
+            Expanded(
+              child: ListView.builder(
+                padding: const .symmetric(vertical: 8),
+                itemCount: _messages.length,
+                itemBuilder: (context, index) {
+                  return _buildMessage(_messages[index]);
+                },
+              ),
+            ),
             Row(
               spacing: 8,
               children: [
@@ -51,7 +87,9 @@ class ChatScreenState extends State<ChatScreen> {
                   icon: const Icon(LucideIcons.smile),
                 ),
                 Expanded(
-                  child: const TextField(
+                  child: TextField(
+                    controller: _controller,
+                    onSubmitted: (_) => _sendMessage(),
                     placeholder: Text("Type a message..."),
                   ),
                 ),
@@ -66,4 +104,33 @@ class ChatScreenState extends State<ChatScreen> {
       ),
     );
   }
+
+  Widget _buildMessage(ChatMessage message) {
+    return Align(
+      alignment: message.isMe ? .centerRight : .centerLeft,
+      child: Container(
+        margin: const .symmetric(vertical: 4),
+        padding: const .all(12),
+        decoration: BoxDecoration(
+          color: message.isMe
+              ? Colors.blue.withValues(alpha: .2)
+              : Colors.gray.withValues(alpha: .15),
+          borderRadius: .circular(12),
+        ),
+        child: Text(message.text),
+      ),
+    );
+  }
+}
+
+class ChatMessage {
+  final String text;
+  final bool isMe;
+  final DateTime timestamp;
+
+  ChatMessage({
+    required this.text,
+    required this.isMe,
+    required this.timestamp,
+  });
 }
