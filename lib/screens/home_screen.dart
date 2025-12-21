@@ -54,6 +54,11 @@ class HomeScreen extends StatelessWidget {
       "icon": LucideIcons.listTodo,
       "description": "Track tasks and mark progress.",
     },
+    {
+      "title": "Calculator",
+      "icon": LucideIcons.calculator,
+      "description": "Calculate expressions.",
+    },
   ];
 
   @override

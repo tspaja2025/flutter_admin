@@ -1,4 +1,5 @@
 import "package:flutter_admin/screens/api_keys_screen.dart";
+import "package:flutter_admin/screens/calculator_screen.dart";
 import "package:flutter_admin/screens/calendar_screen.dart";
 import "package:flutter_admin/screens/chat_screen.dart";
 import "package:flutter_admin/screens/file_manager_screen.dart";
@@ -34,6 +35,7 @@ class DefaultScreenState extends State<DefaultScreen> {
     const NotesScreen(),
     const QrGeneratorScreen(),
     const ToDoScreen(),
+    const CalculatorScreen(),
   ];
 
   @override
@@ -81,6 +83,10 @@ class DefaultScreenState extends State<DefaultScreen> {
                     _buildNavigationButton("Notes", LucideIcons.stickyNote),
                     _buildNavigationButton("QR Generator", LucideIcons.qrCode),
                     _buildNavigationButton("To Do", LucideIcons.listTodo),
+                    _buildNavigationButton(
+                      "Calculator",
+                      LucideIcons.calculator,
+                    ),
                   ],
                 ),
                 Expanded(

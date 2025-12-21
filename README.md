@@ -19,6 +19,7 @@ This repository showcases reusable architectures, clean UI patterns, and practic
 | 📝 **Note Taking App**   | Create and organize personal notes.                            |
 | 📱 **QR Generator**      | Generate QR codes from text input.                             |
 | ✅ **To-Do App**          | Manage tasks with completion tracking.                         |
+| 🧮 **Calculator App**          | Calculate expressions.                        |
 
 ---
 

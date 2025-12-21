@@ -1,7 +1,7 @@
-import "dart:html" as html;
+import "dart:js_interop";
+import 'package:web/web.dart' as web;
 import "dart:io";
 import "dart:ui" as ui;
-
 import "package:flutter/rendering.dart";
 import "package:qr_flutter/qr_flutter.dart";
 import "package:shadcn_flutter/shadcn_flutter.dart";
@@ -65,16 +65,16 @@ class QrGeneratorScreenState extends State<QrGeneratorScreen> {
 
     final image = await boundary.toImage(pixelRatio: 3);
     final byteData = await image.toByteData(format: ui.ImageByteFormat.png);
-    final pngBytes = byteData!.buffer.asUint8List();
+    final pngBytes = byteData!.buffer.asUint8List().toJS;
 
-    final blob = html.Blob([pngBytes]);
-    final url = html.Url.createObjectUrlFromBlob(blob);
+    final blob = web.Blob(JSArray.from(pngBytes));
+    final url = web.URL.createObjectURL(blob);
 
-    final anchor = html.AnchorElement(href: url)
+    final anchor = web.HTMLAnchorElement()
       ..setAttribute("download", "qr_code.png")
       ..click();
 
-    html.Url.revokeObjectUrl(url);
+    web.URL.revokeObjectURL(url);
   }
 
   Future<void> _downloadQrFile() async {
